@@ -32,6 +32,15 @@
   .screen.active{display:flex;animation:screenIn .35s cubic-bezier(.2,.8,.2,1)}
   @keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
+  /* VERSION FOOTER */
+  .version-footer{
+    position:fixed;bottom:10px;right:16px;
+    font-size:11px;color:#5a5a70;letter-spacing:.08em;font-weight:700;
+    z-index:40;font-variant-numeric:tabular-nums;
+    user-select:none;pointer-events:none;
+  }
+  @media (max-width:700px){ .version-footer{bottom:8px;right:10px;font-size:10px} }
+
   /* Верхняя панель */
   .top-bar{
     position:fixed;top:20px;right:20px;
@@ -496,7 +505,7 @@
   .odd-card.disabled{pointer-events:none}
   .odd-card.selected{
     border-color:#ffffff;
-    box-shadow:0 0 0 2px #ffffff, 0 0 40px rgba(255,255,255,.7);
+    box-shadow:0 0 0 2px #ffffff, 0 0 0 40px rgba(255,255,255,.7);
     animation:oddWhitePulse .45s ease;
   }
   @keyframes oddWhitePulse{
@@ -914,7 +923,7 @@
   }
 
   /* ============================================ */
-  /* MISSING WORD (ЧТО ПРОПУЩЕНО) */
+  /* MISSING WORD */
   /* ============================================ */
   #screen-missing{width:100%;gap:18px}
   .missing-card{
@@ -1005,6 +1014,89 @@
     font-size:13px;color:#c4b5fd;font-weight:800;letter-spacing:.02em;
     padding:8px 0;
   }
+
+  /* ============================================ */
+  /* GUESS THE TRACK */
+  /* ============================================ */
+  #screen-guess{width:100%;gap:18px}
+  .gt-layout{width:100%;max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .gt-attempts{display:flex;flex-direction:column;gap:8px}
+  .gt-empty{
+    padding:28px 20px;text-align:center;color:var(--muted);font-size:13px;
+    border-radius:14px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.12);
+    letter-spacing:.02em;
+  }
+  .gt-row{
+    padding:12px 14px;border-radius:14px;
+    background:var(--card);border:1px solid var(--border);
+    display:flex;flex-direction:column;gap:10px;
+    animation:cardIn .3s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .gt-row.correct{
+    border-color:#22c55e;
+    box-shadow:0 0 0 1px rgba(34,197,94,.5), 0 20px 44px -22px rgba(34,197,94,.9);
+    background:rgba(34,197,94,.05);
+  }
+  .gt-row-head{display:flex;align-items:center;gap:10px;min-width:0}
+  .gt-row-num{
+    width:22px;flex-shrink:0;color:#8b8b9e;font-size:11.5px;font-weight:800;
+    font-variant-numeric:tabular-nums;text-align:right;
+  }
+  .gt-row.correct .gt-row-num{color:#4ade80}
+  .gt-row-guess{
+    flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font-size:14px;font-weight:700;color:#eaeaf3;letter-spacing:-.005em;
+  }
+  .gt-row.correct .gt-row-guess{color:#bbf7d0}
+  .gt-row-artist{
+    font-size:11px;color:var(--muted);flex-shrink:0;max-width:45%;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .gt-hints{display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:6px}
+  .gt-hint{
+    padding:8px;border-radius:10px;background:rgba(255,255,255,.03);
+    border:1px solid var(--border);
+    display:flex;flex-direction:column;gap:3px;min-width:0;
+  }
+  .gt-hint.eq{background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.5)}
+  .gt-hint.up,.gt-hint.down{background:rgba(139,92,246,.13);border-color:rgba(139,92,246,.4)}
+  .gt-hint.neq{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35)}
+  .gt-hint.na{opacity:.45}
+  .gt-hint-label{
+    color:#8b8b9e;font-size:9px;font-weight:800;text-transform:uppercase;
+    letter-spacing:.08em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .gt-hint-value{
+    font-size:12.5px;font-weight:800;color:#eaeaf3;
+    display:flex;align-items:center;gap:4px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .gt-hint.eq .gt-hint-value{color:#86efac}
+  .gt-hint.up .gt-hint-value,.gt-hint.down .gt-hint-value{color:#c4b5fd}
+  .gt-hint.neq .gt-hint-value{color:#fca5a5}
+  .gt-hint-arrow{font-size:13px;flex-shrink:0}
+  @media (max-width:640px){
+    .gt-hints{grid-template-columns:repeat(3, minmax(0, 1fr))}
+  }
+  .gt-result{
+    width:100%;padding:28px 20px;border-radius:20px;
+    background:var(--card);border:1px solid var(--border);
+    display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
+    animation:cardIn .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .gt-result-title{
+    font-size:24px;font-weight:800;letter-spacing:-.02em;
+    background:linear-gradient(100deg,#fff,#c4b5fd);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .gt-result-text{font-size:14px;color:#cfcfe0;line-height:1.5;max-width:520px}
+  .gt-result-text b{color:#c4b5fd}
+  .gt-result-stats{
+    display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
+    font-size:13px;color:#8b8b9e;
+  }
+  .gt-result-stats b{color:#eaeaf3;font-weight:800;font-variant-numeric:tabular-nums}
+  .gt-result-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 
   /* МОДАЛКИ */
   .modal{
@@ -1143,6 +1235,7 @@
   .ri-mode.line-input{background:rgba(168,85,247,.25);color:#e9d5ff}
   .ri-mode.keepdelete{background:rgba(244,114,182,.20);color:#f9a8d4}
   .ri-mode.missing{background:rgba(20,184,166,.22);color:#5eead4}
+  .ri-mode.guess{background:rgba(251,191,36,.22);color:#fcd34d}
   .records-body{flex:1;overflow-y:auto;min-height:200px;max-height:56vh;padding-right:6px}
   .records-body::-webkit-scrollbar{width:6px}
   .records-body::-webkit-scrollbar-track{background:rgba(255,255,255,.04);border-radius:99px}
@@ -1163,6 +1256,7 @@
   .ri-score{font-size:14px;font-weight:800;color:#c4b5fd;font-variant-numeric:tabular-nums;flex-shrink:0}
   .ri-score.green{color:#4ade80}
   .ri-score.blue{color:#60a5fa}
+  .ri-score.red{color:#f87171}
   .records-empty{padding:50px 20px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
   .records-empty .txt{font-size:13.5px;line-height:1.5}
   .records-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:#5a5a70}
@@ -1179,6 +1273,7 @@
   .history-item.line{border-left-color:#86efac}
   .history-item.keepdelete{border-left-color:#f472b6}
   .history-item.missing{border-left-color:#5eead4}
+  .history-item.guess{border-left-color:#fbbf24}
   .history-item .hi-body{flex:1;min-width:0}
   .history-item .hi-label{font-size:13.5px;font-weight:700;color:#eaeaf3;line-height:1.2}
   .history-item .hi-detail{font-size:11.5px;color:var(--muted);margin-top:3px}
@@ -1262,6 +1357,10 @@
       <button class="mode-card" data-mode="missing">
         <div class="mc-title">Что пропущено</div>
         <div class="mc-sub">Впиши пропущенные слова</div>
+      </button>
+      <button class="mode-card" data-mode="guess">
+        <div class="mc-title">Угадай трек</div>
+        <div class="mc-sub">6 попыток по подсказкам</div>
       </button>
       <button class="mode-card" data-mode="keepdelete">
         <div class="mc-title">Keep / Delete</div>
@@ -1405,7 +1504,6 @@
     <div class="line-game-area" id="lineGameArea"></div>
   </section>
 
-  <!-- НОВАЯ ИГРА: ЧТО ПРОПУЩЕНО -->
   <section class="screen" id="screen-missing">
     <header class="game-header">
       <h1 class="game-title" id="msTitle">Что пропущено</h1>
@@ -1425,7 +1523,29 @@
     <div class="missing-card" id="msCard"></div>
   </section>
 
-  <!-- KEEP / DELETE -->
+  <!-- НОВАЯ ИГРА: УГАДАЙ ТРЕК -->
+  <section class="screen" id="screen-guess">
+    <header class="game-header">
+      <h1 class="game-title">Угадай трек</h1>
+      <div class="status-row">
+        <div class="sub" id="gtInfo">Попытка 1 / 6</div>
+        <div class="timer-pill" id="gtTimerPill">
+          <span class="dot"></span>
+          <span id="gtTimer">00:00</span>
+        </div>
+      </div>
+      <div class="progress-row">
+        <div class="progress"><div class="bar" id="gtProgressBar"></div></div>
+        <span class="progress-percent" id="gtProgressPercent">0%</span>
+      </div>
+    </header>
+
+    <div class="gt-layout">
+      <div class="gt-attempts" id="gtAttempts"></div>
+      <div class="gt-input-wrap" id="gtInputWrap"></div>
+    </div>
+  </section>
+
   <section class="screen" id="screen-keepdelete">
     <header class="game-header">
       <h1 class="game-title" id="kdTitle">Keep / Delete</h1>
@@ -1460,6 +1580,8 @@
 
 </div>
 
+<div class="version-footer">v1.0.0</div>
+
 <!-- МОДАЛКА ПРАВИЛ -->
 <div class="modal" id="rulesModal">
   <div class="modal-content">
@@ -1478,6 +1600,7 @@
         <li><b>Что больше?</b> 30 раундов по две карточки. Нужно угадать, где значение выше.</li>
         <li><b>Откуда строчка.</b> 30 раундов. Показывается строка из трека — нужно угадать, из какого. Есть режимы «Выбор из 4» и «Ввод через поиск».</li>
         <li><b>Что пропущено.</b> 20 раундов. Показывается трек (обложка + название) и 2 или 4 строчки из него, но часть слов пропущена. Нужно вручную вписать эти слова. В одной строчке 1 пропуск (или 2, если строчка длинная). Регистр букв и знаки препинания не важны.</li>
+        <li><b>Угадай трек.</b> 6 попыток угадать случайный трек. После каждой попытки показываются подсказки: год, длительность, прослушивания, длина названия, число слов, альбом. Стрелки ↑↓ показывают, больше или меньше правильное значение, ✓ — совпадение, ✗ — не совпадает.</li>
         <li><b>Keep / Delete.</b> Выпадает случайный альбом и случайное число keep/delete. Показываются треки по одному, решаешь — оставить или удалить. Кипов всегда меньше.</li>
         <li>Результаты всех игр сохраняются в статистике, последние 10 партий — в истории.</li>
       </ul>
@@ -1497,6 +1620,7 @@
         <li><b>Откуда строчка · Выбор</b> — база <b>90</b>.</li>
         <li><b>Откуда строчка · Ввод</b> — база <b>315</b>.</li>
         <li><b>Что пропущено</b> — база <b>120</b>, ориентир <b>5 минут</b>.</li>
+        <li><b>Угадай трек</b> — до <b>80 баллов</b> за угадывание (меньше попыток — больше баллов).</li>
         <li><b>Keep / Delete</b> — <b>20 баллов</b> за завершение альбома.</li>
       </ul>
     </div>
@@ -1657,6 +1781,7 @@
         <button data-rtab="compare">Что больше</button>
         <button data-rtab="line">Откуда строчка</button>
         <button data-rtab="missing">Что пропущено</button>
+        <button data-rtab="guess">Угадай трек</button>
         <button data-rtab="keepdelete">Keep/Delete</button>
       </div>
       <div class="records-body" id="recordsBody"></div>
@@ -1685,11 +1810,11 @@
 <script>
 /* ====================== FALLBACK ====================== */
 const DEFAULT_TRACKS_TEXT = `
-Kai Angel - boost it - boostit.png - 510K - 02:03
-Kai Angel - Madonna - madonna.png - 1.13M - 01:57
-Kai Angel - Korea Graves - koreagraves.png - 1.39M - 02:16
-Kai Angel - i need to chill - 1.75M - 02:16
-Kai Angel - SKULL - 724K - 01:52
+Kai Angel - boost it - boostit.png - 510K - 02:03 - 2023
+Kai Angel - Madonna - madonna.png - 1.13M - 01:57 - 2024
+Kai Angel - Korea Graves - koreagraves.png - 1.39M - 02:16 - 2024
+Kai Angel - i need to chill - 1.75M - 02:16 - 2024
+Kai Angel - SKULL - 724K - 01:52 - 2024
 `;
 
 /* ====================== DOM ====================== */
@@ -1703,6 +1828,7 @@ const screens = {
   compare:    document.getElementById('screen-compare'),
   line:       document.getElementById('screen-line'),
   missing:    document.getElementById('screen-missing'),
+  guess:      document.getElementById('screen-guess'),
   keepdelete: document.getElementById('screen-keepdelete'),
 };
 
@@ -1763,13 +1889,21 @@ const lineTimerPill = document.getElementById('lineTimerPill');
 const lineProgressBar = document.getElementById('lineProgressBar');
 const lineProgressPercent = document.getElementById('lineProgressPercent');
 
-// Missing game DOM
 const msCard = document.getElementById('msCard');
 const msInfo = document.getElementById('msInfo');
 const msTimerEl = document.getElementById('msTimer');
 const msTimerPill = document.getElementById('msTimerPill');
 const msProgressBar = document.getElementById('msProgressBar');
 const msProgressPercent = document.getElementById('msProgressPercent');
+
+// Guess game DOM
+const gtAttemptsEl = document.getElementById('gtAttempts');
+const gtInputWrap = document.getElementById('gtInputWrap');
+const gtInfo = document.getElementById('gtInfo');
+const gtTimerEl = document.getElementById('gtTimer');
+const gtTimerPill = document.getElementById('gtTimerPill');
+const gtProgressBar = document.getElementById('gtProgressBar');
+const gtProgressPercent = document.getElementById('gtProgressPercent');
 
 /* ====================== СОСТОЯНИЕ ====================== */
 let allTracks = [];
@@ -1816,7 +1950,6 @@ let cmpTimerInterval = null;
 let cmpCards = [];
 let cmpUsedIds = new Set();
 
-// Line game
 const LINE_ROUNDS = 30;
 let lineRoundIndex = 0;
 let lineRoundStartTime = 0;
@@ -1833,12 +1966,11 @@ let lyricsDB = {};
 let lyricEntries = [];
 let lyricsReady = false;
 
-// Missing game
 const MS_ROUNDS = 20;
 let msRoundIndex = 0;
 let msRoundStartTime = 0;
 let msRoundTimes = [];
-let msRoundResults = []; // {correct, total}
+let msRoundResults = [];
 let msCorrectWords = 0;
 let msTotalWords = 0;
 let msGameActive = false;
@@ -1849,7 +1981,12 @@ let msTimerStart = 0;
 let msTimerInterval = null;
 let msUsedKeys = new Set();
 
-// Keep / Delete
+// Guess the track
+const GT_MAX_ATTEMPTS = 6;
+let gtState = null;
+let gtTimerStart = 0;
+let gtTimerInterval = null;
+
 let kdState = null;
 
 let selectedMode = null;
@@ -1977,7 +2114,7 @@ function calcLineBreakdown(totalTime, accuracy, mode){
   return { base, accuracyMultiplier, speedMultiplier, total: Math.max(1, Math.round(base * accuracyMultiplier * speedMultiplier)), midTimeSec: MID_TIME, modeBonus: 0 };
 }
 function calcMissingBreakdown(totalTime, accuracy){
-  const MID_TIME = 300; // 5 минут
+  const MID_TIME = 300;
   const base = 120;
   const acc = Math.max(0, Math.min(100, accuracy)) / 100;
   const accuracyMultiplier = acc * acc;
@@ -2090,7 +2227,7 @@ function makeTypo(title){
 const IMG_EXT_RE = /\.(png|jpe?g|webp|gif|avif|bmp|svg)$/i;
 const COVER_TAIL_RE = /^(.*?)\s+-\s+(\S+\.(?:png|jpe?g|webp|gif|avif|bmp|svg))\s*$/i;
 const DURATION_RE = /^(\d{1,2}):(\d{2})$/;
-const SIZE_RE = /^(\d+(?:[.,]\d+)?)\s*([KMGkmg])$/;
+const SIZE_RE = /^(\d+(?:[.,]\d+)?)\s*([KMGkmgкКмМгГ]+)$/;
 
 function parseDurationStr(s){
   const m = String(s).trim().match(DURATION_RE);
@@ -2101,7 +2238,11 @@ function parseSizeStr(s){
   const m = String(s).trim().match(SIZE_RE);
   if (!m) return null;
   const num = parseFloat(m[1].replace(',', '.'));
-  const unit = m[2].toUpperCase();
+  let unit = m[2][0].toUpperCase();
+  // Кириллица → латиница
+  if (unit === 'К') unit = 'K';
+  if (unit === 'М') unit = 'M';
+  if (unit === 'Г') unit = 'G';
   const mult = unit === 'K' ? 1000 : unit === 'M' ? 1000000 : unit === 'G' ? 1000000000 : 1;
   return Math.round(num * mult);
 }
@@ -2113,25 +2254,38 @@ function resolveCover(cover){
 }
 function parseOneTrack(line){
   const parts = line.split(/\s+-\s+/).map(s => s.trim()).filter(Boolean);
-  let plays = null, duration = null, cover = null;
+  let plays = null, duration = null, cover = null, year = null;
+
+  // 1. Год — с конца (4-значное число 1900–2099)
+  if (parts.length > 2){
+    const last = parts[parts.length - 1];
+    if (/^\d{4}$/.test(last)){
+      const y = parseInt(last, 10);
+      if (y >= 1900 && y <= 2099){ year = y; parts.pop(); }
+    }
+  }
+  // 2. Длительность MM:SS
   if (parts.length){
     const d = parseDurationStr(parts[parts.length - 1]);
     if (d !== null){ duration = d; parts.pop(); }
   }
+  // 3. Прослушивания (510K / 1.13M / 3.5K / 826К / 3.2М)
   if (parts.length){
     const p = parseSizeStr(parts[parts.length - 1]);
     if (p !== null){ plays = p; parts.pop(); }
   }
+  // 4. Обложка (*.png / *.jpg / ...)
   if (parts.length > 1){
     const last = parts[parts.length - 1];
     if (IMG_EXT_RE.test(last)){ cover = last; parts.pop(); }
   }
+
   let artist = '', title = '';
   if (parts.length >= 2){ artist = parts[0]; title = parts.slice(1).join(' - '); }
   else if (parts.length === 1){ title = parts[0]; }
   if (!title) return null;
   const c = colorsFor(title + artist);
-  return { id: nextTrackId++, title, artist: artist || '—', cover: resolveCover(cover), c1: c.c1, c2: c.c2, plays, duration };
+  return { id: nextTrackId++, title, artist: artist || '—', cover: resolveCover(cover), c1: c.c1, c2: c.c2, plays, duration, year, albumName: null };
 }
 function parseTracks(text){
   const lines = text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
@@ -2144,27 +2298,42 @@ function parseTracks(text){
     if (sepMatch){
       const rest = sepMatch[1].trim();
       if (!rest){ section = 'albums'; currentAlbum = null; continue; }
-      let name = rest, cover = null;
-      const cm = rest.match(COVER_TAIL_RE);
+      let name = rest, cover = null, albumYear = null;
+      let restNoYear = rest;
+      const yearMatch = rest.match(/^(.*?)\s+-\s+(\d{4})\s*$/);
+      if (yearMatch){
+        const y = parseInt(yearMatch[2], 10);
+        if (y >= 1900 && y <= 2099){
+          albumYear = y;
+          restNoYear = yearMatch[1];
+        }
+      }
+      const cm = restNoYear.match(COVER_TAIL_RE);
       if (cm){ name = cm[1].trim(); cover = cm[2]; }
-      currentAlbum = { name, cover: resolveCover(cover), tracks: [] };
+      else { name = restNoYear.trim(); }
+      currentAlbum = { name, cover: resolveCover(cover), year: albumYear, tracks: [] };
       structure.albums.push(currentAlbum);
       section = 'albums';
       continue;
     }
     const track = parseOneTrack(line);
     if (!track) continue;
-    flat.push(track);
-    if (section === 'singles') structure.singles.push(track);
-    else {
-      if (currentAlbum) currentAlbum.tracks.push(track);
-      else {
-        if (!structure.albums.length || structure.albums[structure.albums.length - 1].name !== 'Без альбома'){
-          structure.albums.push({ name: 'Без альбома', cover: null, tracks: [] });
-        }
-        structure.albums[structure.albums.length - 1].tracks.push(track);
+    if (section === 'singles'){
+      structure.singles.push(track);
+    } else if (currentAlbum){
+      track.albumName = currentAlbum.name;
+      if (track.year == null && currentAlbum.year != null) track.year = currentAlbum.year;
+      currentAlbum.tracks.push(track);
+    } else {
+      if (!structure.albums.length || structure.albums[structure.albums.length - 1].name !== 'Без альбома'){
+        structure.albums.push({ name: 'Без альбома', cover: null, year: null, tracks: [] });
       }
+      const alb = structure.albums[structure.albums.length - 1];
+      track.albumName = alb.name;
+      if (track.year == null && alb.year != null) track.year = alb.year;
+      alb.tracks.push(track);
     }
+    flat.push(track);
   }
   return { flat, structure };
 }
@@ -2297,6 +2466,11 @@ const MODE_DESCRIPTIONS = {
     text: '20 раундов. Показывается трек (обложка + название) и 2 или 4 строчки из него, но некоторые слова пропущены. Нужно вручную вписать эти слова. В одной строчке обычно 1 пропуск, а в длинной — до 2. Регистр букв и знаки препинания не важны.',
     reward: 'Награда: <b>база 120</b>, ориентир <b>5 минут</b>.',
   },
+  guess: {
+    title: 'Угадай трек',
+    text: 'У тебя 6 попыток угадать случайный трек. После каждой попытки показываются подсказки: год, длительность, прослушивания, длина названия, число слов и альбом. Стрелки ↑ и ↓ показывают, куда двигаться, ✓ — совпадение.',
+    reward: 'Награда: <b>до 80 баллов</b> — чем меньше попыток, тем больше.',
+  },
   keepdelete: {
     title: 'Keep / Delete',
     text: 'Выпадает случайный альбом. Показываются треки по одному — решаешь, оставить трек или удалить. Количество решений, кипов и делитов случайно, кипов всегда меньше.',
@@ -2407,6 +2581,7 @@ btnModeStart.addEventListener('click', () => {
   else if (selectedMode === 'compare') runCompareFlow(selectedCmpSubmode);
   else if (selectedMode === 'line') runLineFlow(selectedLineSubmode);
   else if (selectedMode === 'missing') runMissingFlow();
+  else if (selectedMode === 'guess') runGuessFlow();
   else if (selectedMode === 'keepdelete') runKeepDeleteFlow();
 });
 
@@ -2437,12 +2612,12 @@ document.getElementById('closeHistoryX').addEventListener('click', () => closeMo
 historyModal.addEventListener('click', e => { if (e.target === historyModal) closeModal('historyModal'); });
 
 /* ====================== RECORDS ====================== */
-const RECORDS_KEY = 'kaiAngelTracksGame_records_v12';
+const RECORDS_KEY = 'kaiAngelTracksGame_records_v13';
 const LEGACY_KEYS = [
-  'kaiAngelTracksGame_records_v11','kaiAngelTracksGame_records_v10','kaiAngelTracksGame_records_v9',
-  'kaiAngelTracksGame_records_v8','kaiAngelTracksGame_records_v7','kaiAngelTracksGame_records_v6',
-  'kaiAngelTracksGame_records_v5','kaiAngelTracksGame_records_v4','kaiAngelTracksGame_records_v3',
-  'kaiAngelTracksGame_records_v2','kaiAngelTracksGame_records_v1',
+  'kaiAngelTracksGame_records_v12','kaiAngelTracksGame_records_v11','kaiAngelTracksGame_records_v10',
+  'kaiAngelTracksGame_records_v9','kaiAngelTracksGame_records_v8','kaiAngelTracksGame_records_v7',
+  'kaiAngelTracksGame_records_v6','kaiAngelTracksGame_records_v5','kaiAngelTracksGame_records_v4',
+  'kaiAngelTracksGame_records_v3','kaiAngelTracksGame_records_v2','kaiAngelTracksGame_records_v1',
 ];
 const MAX_LIST = 20;
 const MAX_HISTORY = 10;
@@ -2458,6 +2633,7 @@ function defaultRecords(){
     comparisonResults: [],
     lineResults: [],
     missingResults: [],
+    guessResults: [],
     keepDeleteResults: [],
     totalPoints: 0,
     history: [],
@@ -2475,6 +2651,7 @@ function normalizeRecords(raw){
     comparisonResults: Array.isArray(r.comparisonResults) ? r.comparisonResults : [],
     lineResults: Array.isArray(r.lineResults) ? r.lineResults : [],
     missingResults: Array.isArray(r.missingResults) ? r.missingResults : [],
+    guessResults: Array.isArray(r.guessResults) ? r.guessResults : [],
     keepDeleteResults: Array.isArray(r.keepDeleteResults) ? r.keepDeleteResults : [],
     totalPoints: typeof r.totalPoints === 'number' ? r.totalPoints : 0,
     history: Array.isArray(r.history) ? r.history : [],
@@ -2605,6 +2782,14 @@ function saveMissingResult(entry){
   r.missingResults = r.missingResults.slice(0, MAX_LIST);
   saveRecords(r);
 }
+function saveGuessResult(entry){
+  const r = loadRecords();
+  if (!Array.isArray(r.guessResults)) r.guessResults = [];
+  r.guessResults.push(entry);
+  r.guessResults.sort((a, b) => b.date - a.date);
+  r.guessResults = r.guessResults.slice(0, MAX_LIST);
+  saveRecords(r);
+}
 function saveKeepDeleteResult(entry){
   const r = loadRecords();
   r.keepDeleteResults.push(entry);
@@ -2621,8 +2806,9 @@ function renderGeneralStatsHTML(r){
   const cmpCount = r.comparisonResults.length;
   const lineCount = r.lineResults.length;
   const msCount = (r.missingResults || []).length;
+  const gtCount = (r.guessResults || []).length;
   const kdCount = (r.keepDeleteResults || []).length;
-  const totalGames = tournCount + chronoCount + oddCount + cmpCount + lineCount + msCount + kdCount;
+  const totalGames = tournCount + chronoCount + oddCount + cmpCount + lineCount + msCount + gtCount + kdCount;
 
   const tournTime = r.tournamentTimes.reduce((a, e) => a + e.time, 0);
   const chronoTime = r.chronologyTimes.reduce((a, e) => a + e.time, 0);
@@ -2649,7 +2835,7 @@ function renderGeneralStatsHTML(r){
       <div class="stats-hero-item"><span class="stats-hero-label">Всего баллов</span><span class="stats-hero-value purple">${totalPoints.toLocaleString('ru-RU')}</span></div>
       <div class="stats-hero-item"><span class="stats-hero-label">Всего игр</span><span class="stats-hero-value">${totalGames}</span></div>
       <div class="stats-hero-item"><span class="stats-hero-label">Общее время</span><span class="stats-hero-value">${formatDuration(totalTime)}</span></div>
-      <div class="stats-hero-item"><span class="stats-hero-label">Режимов сыграно</span><span class="stats-hero-value">${[tournCount, chronoCount, oddCount, cmpCount, lineCount, msCount, kdCount].filter(x=>x>0).length} / 7</span></div>
+      <div class="stats-hero-item"><span class="stats-hero-label">Режимов сыграно</span><span class="stats-hero-value">${[tournCount, chronoCount, oddCount, cmpCount, lineCount, msCount, gtCount, kdCount].filter(x=>x>0).length} / 8</span></div>
     </div>
     <div class="stats-block">
       <div class="stats-block-head"><div class="stats-block-title">Турнир</div><div class="stats-block-count">${tournCount}</div></div>
@@ -2706,6 +2892,15 @@ function renderGeneralStatsHTML(r){
       </div>
     </div>
     <div class="stats-block">
+      <div class="stats-block-head"><div class="stats-block-title">Угадай трек</div><div class="stats-block-count">${gtCount}</div></div>
+      <div class="stats-block-rows">
+        ${gtCount ? `
+          <div class="stats-block-row"><span class="lbl">Побед</span><b>${(r.guessResults.filter(e => e.won)).length} / ${gtCount}</b></div>
+          <div class="stats-block-row"><span class="lbl">Лучший результат</span><b>${(() => { const wins = r.guessResults.filter(e => e.won); if (!wins.length) return '—'; const best = Math.min(...wins.map(e => e.attemptsUsed)); return `за ${best} поп.`; })()}</b></div>
+        ` : `<div class="stats-block-empty">Ещё не сыграно</div>`}
+      </div>
+    </div>
+    <div class="stats-block">
       <div class="stats-block-head"><div class="stats-block-title">Keep / Delete</div><div class="stats-block-count">${kdCount}</div></div>
       <div class="stats-block-rows">
         ${kdCount ? `
@@ -2721,7 +2916,6 @@ let oddSubtab = 'all';
 let tournSubtab = 'records';
 let cmpSubtab = 'all';
 let lineSubtab = 'all';
-let msSubtab = 'all';
 
 function renderRecords(){
   const r = loadRecords();
@@ -2734,7 +2928,7 @@ function renderRecords(){
     return;
   }
 
-  count.textContent = `Т: ${r.tournamentTimes.length} · Х: ${r.chronologyTimes.length} · К: ${r.oddOneOut.length} · Б: ${r.comparisonResults.length} · С: ${r.lineResults.length} · П: ${(r.missingResults||[]).length} · KD: ${(r.keepDeleteResults||[]).length}`;
+  count.textContent = `Т: ${r.tournamentTimes.length} · Х: ${r.chronologyTimes.length} · К: ${r.oddOneOut.length} · Б: ${r.comparisonResults.length} · С: ${r.lineResults.length} · П: ${(r.missingResults||[]).length} · У: ${(r.guessResults||[]).length} · KD: ${(r.keepDeleteResults||[]).length}`;
 
   if (recordsTab === 'tournament'){
     const subtabsHtml = `<div class="records-subtabs">
@@ -2866,6 +3060,20 @@ function renderRecords(){
     byTime.forEach((e, i) => {
       const rc = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
       html += `<div class="record-item"><div class="ri-rank ${rc}">${i + 1}</div><div class="ri-info"><div class="ri-title">${formatTime(e.totalTime)}</div><div class="ri-sub">${e.accuracy.toFixed(2)}% · ${e.correct}/${e.total}</div></div><div class="ri-score blue">${e.accuracy.toFixed(0)}%</div></div>`;
+    });
+    html += `</div></div>`;
+    body.innerHTML = html;
+  }
+
+  else if (recordsTab === 'guess'){
+    const list = r.guessResults || [];
+    if (!list.length){ body.innerHTML = emptyRecordsHTML('Сыграй «Угадай трек».'); return; }
+    let html = `<div class="record-section"><div class="record-section-title">Последние партии</div><div class="record-list">`;
+    list.slice(0, MAX_LIST).forEach((e, i) => {
+      const rc = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      const status = e.won ? `Угадал за ${e.attemptsUsed} поп.` : 'Не угадал';
+      const cls = e.won ? 'green' : 'red';
+      html += `<div class="record-item"><div class="ri-rank ${rc}">${i + 1}</div><div class="ri-info"><div class="ri-title">${esc(e.answer.title)}</div><div class="ri-sub">${esc(e.answer.artist)} · ${status} · ${formatDate(e.date)}</div></div><div class="ri-score ${cls}">${e.won ? '+' + e.points : '0'}</div></div>`;
     });
     html += `</div></div>`;
     body.innerHTML = html;
@@ -3169,7 +3377,7 @@ function buildChronoBoard(){
             <span class="ph-icon">♪</span>
             ${coverPath ? `<img src="${esc(coverPath)}" alt="" onerror="this.remove()">` : ''}
           </div>
-          <div class="album-name">${esc(album.name)}</div>
+          <div class="album-name">${esc(album.name)}${album.year ? ' · ' + album.year : ''}</div>
         </div>
         <div class="album-slots">${album.tracks.map(t => `<div class="slot" data-correct-id="${t.id}"></div>`).join('')}</div>
       </div>`;
@@ -4090,7 +4298,6 @@ function stopMsTimer(){
   msTimerPill.classList.add('stopped');
 }
 
-// Нормализация слова: убираем пунктуацию, приводим к нижнему регистру
 function normalizeWord(s){
   return String(s || '')
     .toLowerCase()
@@ -4103,7 +4310,6 @@ let msQueue = [];
 let msLastKey = null;
 
 function buildMsQueue(){
-  // Только треки, где есть минимум 2 строки и каждая строка минимум 3 слова
   msQueue = shuffle(lyricEntries.filter(e =>
     e.lines.length >= 2 &&
     e.lines.some(l => l.split(/\s+/).filter(Boolean).length >= 3)
@@ -4152,20 +4358,17 @@ function nextMissingRound(){
   const entry = popMsEntry();
   if (!entry || !entry.lines.length){ msRoundIndex++; nextMissingRound(); return; }
 
-  // Фильтруем строки: минимум 3 слова
   const eligibleLineIdxs = entry.lines
     .map((l, i) => ({ l, i }))
     .filter(x => x.l.split(/\s+/).filter(Boolean).length >= 3)
     .map(x => x.i);
 
   if (eligibleLineIdxs.length < 2){
-    // Мало годных строк — пропускаем, но не выкидываем навсегда
     msRoundIndex++; nextMissingRound(); return;
   }
 
   msCurrentEntry = entry;
 
-  // Выбираем 2 или 4 строки
   const numLines = Math.random() < 0.55 ? 2 : 4;
   const actualNum = Math.min(numLines, eligibleLineIdxs.length);
   const lineIndices = shuffle(eligibleLineIdxs).slice(0, actualNum).sort((a, b) => a - b);
@@ -4175,21 +4378,18 @@ function nextMissingRound(){
     const words = lineText.split(/\s+/).filter(Boolean);
     const charLen = lineText.length;
 
-    // Определяем число пропусков: 1 по умолчанию, 2 если строка длинная
     let numGaps = 1;
     if (charLen > 40 && words.length >= 4 && Math.random() < 0.6){
       numGaps = 2;
     }
     numGaps = Math.min(numGaps, Math.max(1, words.length - 1));
 
-    // Кандидаты: слова длиной >= 2 (без пунктуации)
     let eligibleIdxs = words
       .map((w, i) => ({ w, i, clean: w.replace(/[^\p{L}\p{N}]/gu, '') }))
       .filter(x => x.clean.length >= 2)
       .map(x => x.i);
     if (!eligibleIdxs.length) eligibleIdxs = words.map((_, i) => i);
 
-    // Выбираем не соседние
     const picked = [];
     const shuffledIdxs = shuffle(eligibleIdxs);
     for (const i of shuffledIdxs){
@@ -4197,7 +4397,6 @@ function nextMissingRound(){
       if (picked.some(p => Math.abs(p - i) <= 1)) continue;
       picked.push(i);
     }
-    // Если получилось меньше из-за соседства — добираем без проверки
     if (picked.length < numGaps){
       for (const i of shuffledIdxs){
         if (picked.length >= numGaps) break;
@@ -4264,7 +4463,6 @@ function renderMissingRound(linesData){
   document.getElementById('msCheckBtn').addEventListener('click', checkMissingAnswer);
 
   const inputs = msCard.querySelectorAll('.missing-input');
-  // Enter — перейти к следующему или отправить
   inputs.forEach((input, idx) => {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter'){
@@ -4298,7 +4496,6 @@ function checkMissingAnswer(){
       correct++;
     } else {
       input.classList.add('wrong');
-      // Добавим плашку с правильным ответом
       const correction = document.createElement('span');
       correction.className = 'missing-correction';
       correction.textContent = gap.expected;
@@ -4389,6 +4586,284 @@ function showMissingResults(e){
 document.getElementById('msPlayAgain').addEventListener('click', () => { closeModal('msResultsModal'); runMissingFlow(); });
 document.getElementById('msToMenu').addEventListener('click', () => { closeModal('msResultsModal'); showScreen('menu'); });
 
+/* ====================== УГАДАЙ ТРЕК ====================== */
+function startGtTimer(){
+  stopGtTimer();
+  gtTimerStart = Date.now();
+  gtTimerPill.classList.remove('stopped');
+  updateGtTimer();
+  gtTimerInterval = setInterval(updateGtTimer, 1000);
+}
+function updateGtTimer(){
+  const el = Math.floor((Date.now() - gtTimerStart) / 1000);
+  const m = String(Math.floor(el / 60)).padStart(2,'0');
+  const s = String(el % 60).padStart(2,'0');
+  gtTimerEl.textContent = `${m}:${s}`;
+}
+function stopGtTimer(){
+  if (gtTimerInterval) clearInterval(gtTimerInterval);
+  gtTimerInterval = null;
+  gtTimerPill.classList.add('stopped');
+}
+
+function startGuessGame(){
+  if (allTracks.length < 2){
+    alert('Недостаточно треков для игры.');
+    showScreen('menu');
+    return;
+  }
+  // Предпочтение — треки с годом, чтобы было больше полезных подсказок
+  const withYear = allTracks.filter(t => t.year != null);
+  const pool = withYear.length >= 5 ? withYear : allTracks;
+  const answer = pool[Math.floor(Math.random() * pool.length)];
+
+  gtState = {
+    answer,
+    attempts: [],
+    maxAttempts: GT_MAX_ATTEMPTS,
+    finished: false,
+    won: false,
+  };
+
+  gtInfo.textContent = `Попытка 1 / ${GT_MAX_ATTEMPTS}`;
+  gtProgressBar.style.width = '0%';
+  gtProgressPercent.textContent = '0%';
+
+  renderGuessGame();
+  startGtTimer();
+}
+
+function gtCompareNumber(a, b){
+  if (a == null || b == null) return 'na';
+  if (a === b) return 'eq';
+  return b > a ? 'up' : 'down';
+}
+function gtCompareEq(a, b){
+  if (a == null && b == null) return 'eq';
+  if (a == null || b == null) return 'neq';
+  return a === b ? 'eq' : 'neq';
+}
+
+function gtAttemptHTML(attempt, num){
+  const g = attempt.track;
+  const h = attempt.hints;
+  const isWin = attempt.win;
+
+  const wordCount = g.title.split(/\s+/).filter(Boolean).length;
+  const albumLabel = g.albumName ? g.albumName : '—';
+
+  const hints = [
+    { label: 'Год',       value: g.year != null ? String(g.year) : '—',  type: h.year },
+    { label: 'Длит.',     value: g.duration != null ? formatMmSs(g.duration) : '—', type: h.duration },
+    { label: 'Плей',      value: g.plays != null ? formatBigNum(g.plays) : '—', type: h.plays },
+    { label: 'Букв',      value: String(g.title.length), type: h.titleLen },
+    { label: 'Слов',      value: String(wordCount), type: h.words },
+    { label: 'Альбом',    value: albumLabel, type: h.album },
+  ];
+
+  let hintsHTML = '';
+  hints.forEach(hh => {
+    let cls = '';
+    let arrow = '';
+    if (hh.type === 'eq'){ cls = 'eq'; arrow = '✓'; }
+    else if (hh.type === 'up'){ cls = 'up'; arrow = '↑'; }
+    else if (hh.type === 'down'){ cls = 'down'; arrow = '↓'; }
+    else if (hh.type === 'neq'){ cls = 'neq'; arrow = '✗'; }
+    else if (hh.type === 'na'){ cls = 'na'; }
+    hintsHTML += `<div class="gt-hint ${cls}">
+      <div class="gt-hint-label">${hh.label}</div>
+      <div class="gt-hint-value"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${esc(hh.value)}</span>${arrow ? `<span class="gt-hint-arrow">${arrow}</span>` : ''}</div>
+    </div>`;
+  });
+
+  return `<div class="gt-row ${isWin ? 'correct' : ''}">
+    <div class="gt-row-head">
+      <div class="gt-row-num">${num}</div>
+      <div class="gt-row-guess">${esc(g.title)}</div>
+      <div class="gt-row-artist">${esc(g.artist)}</div>
+    </div>
+    <div class="gt-hints">${hintsHTML}</div>
+  </div>`;
+}
+
+function renderGuessGame(){
+  if (!gtState) return;
+
+  let html = '';
+  if (!gtState.attempts.length){
+    html = `<div class="gt-empty">Введи название трека, чтобы начать. У тебя 6 попыток.</div>`;
+  } else {
+    gtState.attempts.forEach((attempt, i) => {
+      html += gtAttemptHTML(attempt, i + 1);
+    });
+  }
+  gtAttemptsEl.innerHTML = html;
+
+  if (gtState.finished){
+    gtInputWrap.innerHTML = gtResultHTML();
+    bindGtResultButtons();
+    gtInfo.textContent = gtState.won ? 'Угадал!' : 'Игра завершена';
+    gtProgressBar.style.width = '100%';
+    gtProgressPercent.textContent = '100%';
+  } else {
+    renderGtInput();
+    const used = gtState.attempts.length;
+    gtInfo.textContent = `Попытка ${used + 1} / ${GT_MAX_ATTEMPTS}`;
+    const pct = (used / GT_MAX_ATTEMPTS) * 100;
+    gtProgressBar.style.width = pct + '%';
+    gtProgressPercent.textContent = Math.round(pct) + '%';
+  }
+}
+
+function renderGtInput(){
+  gtInputWrap.innerHTML = `
+    <div class="gt-input-box">
+      <input type="text" class="line-search-input" id="gtInput" placeholder="Начни вводить название или артиста..." autocomplete="off">
+      <div class="line-search-hint" id="gtInputHint">Осталось попыток: ${GT_MAX_ATTEMPTS - gtState.attempts.length}</div>
+      <div class="line-search-list" id="gtInputList"></div>
+    </div>
+  `;
+  const input = document.getElementById('gtInput');
+  const list = document.getElementById('gtInputList');
+  const hint = document.getElementById('gtInputHint');
+  input.addEventListener('input', () => {
+    if (!gtState || gtState.finished) return;
+    renderGtSearchList(input.value, list, hint);
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      const first = list.querySelector('.line-search-item:not(.disabled)');
+      if (first) submitGtGuess(+first.dataset.id);
+    }
+  });
+  setTimeout(() => input.focus(), 60);
+}
+
+function renderGtSearchList(q, listEl, hintEl){
+  const query = (q || '').trim().toLowerCase();
+  if (!query){
+    listEl.innerHTML = '';
+    if (hintEl) hintEl.textContent = `Осталось попыток: ${GT_MAX_ATTEMPTS - gtState.attempts.length}`;
+    return;
+  }
+  const attemptedIds = new Set(gtState.attempts.map(a => a.track.id));
+  const items = allTracks.filter(t => {
+    if (attemptedIds.has(t.id)) return false;
+    return (t.title + ' ' + t.artist).toLowerCase().includes(query);
+  });
+  const shown = items.slice(0, 30);
+  if (!shown.length){
+    listEl.innerHTML = `<div class="line-search-empty">Ничего не найдено</div>`;
+    if (hintEl) hintEl.textContent = '';
+    return;
+  }
+  if (hintEl) hintEl.textContent = `Найдено: ${items.length}`;
+  listEl.innerHTML = shown.map(t => `
+    <button class="line-search-item" data-id="${t.id}">
+      <span class="lsi-title">${esc(t.title)}</span>
+      <span class="lsi-artist">${esc(t.artist)}</span>
+    </button>`).join('');
+}
+
+gtInputWrap.addEventListener('click', (e) => {
+  if (!gtState || gtState.finished) return;
+  const item = e.target.closest('.line-search-item[data-id]');
+  if (!item) return;
+  submitGtGuess(+item.dataset.id);
+});
+
+function submitGtGuess(trackId){
+  if (!gtState || gtState.finished) return;
+  const guess = allTracks.find(t => t.id === trackId);
+  if (!guess) return;
+  if (gtState.attempts.some(a => a.track.id === trackId)) return;
+
+  const answer = gtState.answer;
+  const guessWords = guess.title.split(/\s+/).filter(Boolean).length;
+  const answerWords = answer.title.split(/\s+/).filter(Boolean).length;
+
+  const hints = {
+    year:     gtCompareNumber(guess.year, answer.year),
+    duration: gtCompareNumber(guess.duration, answer.duration),
+    plays:    gtCompareNumber(guess.plays, answer.plays),
+    titleLen: gtCompareNumber(guess.title.length, answer.title.length),
+    words:    gtCompareNumber(guessWords, answerWords),
+    album:    gtCompareEq(guess.albumName, answer.albumName),
+  };
+
+  const win = guess.id === answer.id;
+  gtState.attempts.push({ track: guess, hints, win });
+
+  if (win){
+    gtState.finished = true;
+    gtState.won = true;
+    finishGuessGame();
+  } else if (gtState.attempts.length >= GT_MAX_ATTEMPTS){
+    gtState.finished = true;
+    gtState.won = false;
+    finishGuessGame();
+  } else {
+    renderGuessGame();
+  }
+}
+
+function gtPointsForAttempts(n){
+  const map = { 1: 80, 2: 60, 3: 45, 4: 32, 5: 22, 6: 15 };
+  return map[n] || 0;
+}
+
+function gtResultHTML(){
+  const timeSec = Math.floor((Date.now() - gtTimerStart) / 1000);
+  const used = gtState.attempts.length;
+  const points = gtState.won ? gtPointsForAttempts(used) : 0;
+
+  return `<div class="gt-result">
+    <div class="gt-result-title">${gtState.won ? 'Угадал!' : 'Не угадал :('}</div>
+    <div class="gt-result-text">Загаданный трек: <b>${esc(gtState.answer.title)}</b> · ${esc(gtState.answer.artist)}${gtState.answer.year ? ` · ${gtState.answer.year}` : ''}${gtState.answer.albumName ? ` · ${esc(gtState.answer.albumName)}` : ''}</div>
+    <div class="gt-result-stats">
+      <div><span>Попыток:</span> <b>${used} / ${GT_MAX_ATTEMPTS}</b></div>
+      <div><span>Время:</span> <b>${formatTime(timeSec)}</b></div>
+      <div><span>Баллов:</span> <b style="color:${points > 0 ? '#86efac' : '#f87171'}">+${points}</b></div>
+    </div>
+    <div class="gt-result-actions">
+      <button class="btn-primary" id="gtPlayAgain" style="width:auto;padding:12px 26px;font-size:14px">Сыграть снова</button>
+      <button class="btn-secondary" id="gtToMenu" style="width:auto;padding:12px 26px;font-size:14px">В меню</button>
+    </div>
+  </div>`;
+}
+
+function bindGtResultButtons(){
+  const again = document.getElementById('gtPlayAgain');
+  const toMenu = document.getElementById('gtToMenu');
+  if (again) again.addEventListener('click', () => { runGuessFlow(); });
+  if (toMenu) toMenu.addEventListener('click', () => { showScreen('menu'); });
+}
+
+function finishGuessGame(){
+  stopGtTimer();
+  renderGuessGame();
+
+  const timeSec = Math.floor((Date.now() - gtTimerStart) / 1000);
+  const used = gtState.attempts.length;
+  const points = gtState.won ? gtPointsForAttempts(used) : 0;
+
+  const entry = {
+    answer: { title: gtState.answer.title, artist: gtState.answer.artist },
+    attempts: gtState.attempts.map(a => ({ title: a.track.title, artist: a.track.artist, win: a.win })),
+    won: gtState.won,
+    attemptsUsed: used,
+    time: timeSec,
+    points,
+    date: Date.now(),
+  };
+  saveGuessResult(entry);
+
+  if (points > 0){
+    addPointsToHistory(points, 'guess', 'Угадай трек', `${gtState.won ? 'Угадал за ' + used : 'Проиграл'} · ${formatTime(timeSec)}`);
+  }
+}
+
 /* ====================== KEEP / DELETE ====================== */
 function startKeepDeleteGame(){
   const eligible = trackStructure.albums.filter(a => a.tracks.length >= 4);
@@ -4420,7 +4895,7 @@ function startKeepDeleteGame(){
   };
 
   document.getElementById('kdTitle').textContent = 'Keep / Delete';
-  document.getElementById('kdAlbumName').textContent = album.name;
+  document.getElementById('kdAlbumName').textContent = album.name + (album.year ? ' · ' + album.year : '');
   document.getElementById('kdKeepCount').textContent = `0 / ${K}`;
   document.getElementById('kdDelCount').textContent = `0 / ${D}`;
   document.getElementById('kdKeepPanelCount').textContent = `0 / ${K}`;
@@ -4436,13 +4911,10 @@ function startKeepDeleteGame(){
 
 function nextKdTrack(){
   if (!kdState) return;
-
   const doneKeeps = kdState.kept.length;
   const doneDels = kdState.deleted.length;
-
   if (doneKeeps >= kdState.K && doneDels >= kdState.D){ finishKeepDeleteGame(); return; }
   if (kdState.currentIndex >= kdState.queue.length){ finishKeepDeleteGame(); return; }
-
   kdState.currentTrack = kdState.queue[kdState.currentIndex];
   renderKdCurrent();
   renderKdStats();
@@ -4488,13 +4960,11 @@ function renderKdStats(){
   document.getElementById('kdDelCount').textContent = `${kdState.deleted.length} / ${kdState.D}`;
   document.getElementById('kdKeepPanelCount').textContent = `${kdState.kept.length} / ${kdState.K}`;
   document.getElementById('kdDelPanelCount').textContent = `${kdState.deleted.length} / ${kdState.D}`;
-
   const total = kdState.N;
   const done = kdState.kept.length + kdState.deleted.length;
   const pct = total ? (done / total * 100) : 0;
   document.getElementById('kdProgressBar').style.width = pct + '%';
   document.getElementById('kdProgressPercent').textContent = Math.round(pct) + '%';
-
   const keepList = document.getElementById('kdKeepList');
   const delList = document.getElementById('kdDelList');
   keepList.innerHTML = kdState.kept.length ? kdState.kept.map(kdListItemHTML).join('') : '<div class="kd-empty">Пока пусто</div>';
@@ -4616,6 +5086,16 @@ function runMissingFlow(){
     showScreen('missing');
   });
 }
+function runGuessFlow(){
+  if (allTracks.length < 2){
+    alert('Недостаточно треков для игры.');
+    return;
+  }
+  runShuffleFlow('Готовим раунд…', 'Загадываем трек', () => {
+    startGuessGame();
+    showScreen('guess');
+  });
+}
 function runKeepDeleteFlow(){
   runShuffleFlow('Выбираем альбом…', 'Готовим треки', () => { startKeepDeleteGame(); });
 }
@@ -4629,7 +5109,7 @@ async function init(){
   await loadLyrics();
 
   if (allTracks.length >= 2){
-    menuSub.textContent = `${allTracks.length} треков · 7 режимов`;
+    menuSub.textContent = `${allTracks.length} треков · 8 режимов`;
     menuStats.innerHTML =
       `Синглов: <b>${trackStructure.singles.length}</b><br>` +
       `Альбомов: <b>${trackStructure.albums.length}</b><br>` +
