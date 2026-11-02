@@ -273,7 +273,7 @@
 
   .champion-screen{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%;animation:cardIn .5s cubic-bezier(.2,.8,.2,1) both}
   .champion-summary{
-    position:relative;width:100%;max-width:480px;
+    position:relative;width:100%;max-width:480px;margin:0 auto;
     padding:26px 24px 22px;border-radius:24px;text-align:center;
     background:var(--card);border:1px solid var(--border);
     backdrop-filter:blur(12px);overflow:hidden;
@@ -1075,6 +1075,114 @@
   .gt-result-stats b{color:#eaeaf3;font-weight:800;font-variant-numeric:tabular-nums}
   .gt-result-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 
+  /* ====================== GUESS THE SOUND ====================== */
+  #screen-sound{width:100%;gap:18px}
+  .sound-layout{width:100%;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  .sound-player-card{
+    width:100%;padding:24px;border-radius:22px;
+    background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.08));
+    border:1px solid rgba(139,92,246,.38);box-shadow:0 18px 50px -28px rgba(139,92,246,.9);
+    display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;
+  }
+  .sound-wave-icon{
+    width:108px;height:108px;border-radius:24px;display:grid;place-items:center;
+    background:linear-gradient(145deg,rgba(139,92,246,.28),rgba(236,72,153,.18));
+    border:1px solid rgba(196,181,253,.25);color:#e9d5ff;
+    box-shadow:inset 0 0 40px rgba(139,92,246,.12),0 18px 40px -24px rgba(236,72,153,.8);
+  }
+  .sound-wave-icon svg{width:48px;height:48px}
+  .sound-player-title{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.01em}
+  .sound-player-sub{font-size:12px;color:var(--muted);line-height:1.5;max-width:440px}
+  .sound-play-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-width:220px;padding:14px 26px;border:0;border-radius:99px;
+    background:linear-gradient(100deg,#8b5cf6,#ec4899);color:#fff;
+    font:inherit;font-size:14px;font-weight:800;cursor:pointer;
+    box-shadow:0 14px 32px -16px rgba(236,72,153,.9);transition:transform .18s,filter .18s;
+  }
+  .sound-play-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .sound-play-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+  .sound-player-card .audio-volume-panel{width:min(360px,100%);background:rgba(10,10,18,.22)}
+  .sound-audio-status{min-height:16px;font-size:11.5px;color:#9d91b5}
+  .sound-audio-status.error{color:#fca5a5}
+  .sound-search-wrap{display:flex;flex-direction:column;gap:10px;width:100%}
+  .sound-search-label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c4b5fd}
+  .sound-search-wrap .line-search-list{max-height:310px}
+  .sound-feedback{
+    padding:15px 17px;border-radius:14px;border:1px solid var(--border);
+    background:rgba(255,255,255,.035);font-size:13px;line-height:1.5;color:#dcdceb;
+  }
+  .sound-feedback.correct{background:rgba(34,197,94,.09);border-color:rgba(34,197,94,.42);color:#bbf7d0}
+  .sound-feedback.wrong{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.38);color:#fecaca}
+  .sound-round-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .sound-round-actions .btn-primary,.sound-round-actions .btn-secondary{width:auto;min-width:190px;padding:13px 24px;font-size:14px}
+  .sound-result{
+    width:100%;max-width:760px;margin:0 auto;padding:28px 22px;border-radius:22px;
+    background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;
+    align-items:center;gap:15px;text-align:center;
+  }
+  .sound-result-title{font-size:27px;font-weight:900;letter-spacing:-.025em;background:linear-gradient(100deg,#fff,#c4b5fd,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sound-result-percent{font-size:54px;font-weight:900;line-height:1;color:#c4b5fd;font-variant-numeric:tabular-nums}
+  .sound-result-stats{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+  .sound-result-stats b{display:block;margin-top:4px;color:#fff;font-size:18px;font-variant-numeric:tabular-nums}
+  .sound-result-list{width:100%;max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:6px;text-align:left;padding:2px}
+  .sound-result-row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border-radius:11px;background:rgba(255,255,255,.035);border:1px solid var(--border)}
+  .sound-result-row.good{border-color:rgba(34,197,94,.35)}
+  .sound-result-row.bad{border-color:rgba(239,68,68,.25)}
+  .sound-result-num{font-size:11px;color:var(--muted);font-weight:800;text-align:right}
+  .sound-result-track{min-width:0}
+  .sound-result-track b{display:block;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#eaeaf3}
+  .sound-result-track span{display:block;font-size:10.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+  .sound-result-points{font-size:12px;font-weight:900;white-space:nowrap;color:#86efac}
+  .sound-result-row.bad .sound-result-points{color:#fca5a5}
+
+  /* ====================== SOUNDCloud BEST PLAYLIST ====================== */
+  #screen-bestplaylist{width:100%;gap:18px}
+  .best-playlist-wrap{width:100%;max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+  .best-playlist-prompt{text-align:center;color:#c4b5fd;font-size:14px;font-weight:700;letter-spacing:.03em}
+  .best-playlist-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:100%}
+  .best-track-card{position:relative;min-width:0;padding:22px;border-radius:22px;background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow:hidden;transition:transform .38s cubic-bezier(.2,.8,.2,1),opacity .38s,border-color .38s,box-shadow .38s,filter .38s;animation:bestCardIn .48s cubic-bezier(.2,.8,.2,1) both}
+  .best-track-card:nth-child(2){animation-delay:.08s}
+  .best-track-card::before{content:'';position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s;background:radial-gradient(circle at 50% 0%,rgba(34,197,94,.22),transparent 65%)}
+  .best-track-card.winner{transform:translateY(-7px) scale(1.025);border-color:rgba(34,197,94,.85);box-shadow:0 0 0 1px rgba(34,197,94,.45),0 24px 60px -24px rgba(34,197,94,.7);animation:bestWinnerPulse .72s ease both}
+  .best-track-card.winner::before{opacity:1}
+  .best-track-card.loser{opacity:.3;transform:scale(.94);filter:grayscale(.75);border-color:rgba(239,68,68,.25)}
+  .best-track-card.winner .best-pick-btn{background:linear-gradient(100deg,#16a34a,#22c55e);box-shadow:0 12px 30px -16px rgba(34,197,94,.9)}
+  .best-track-card.loser .best-pick-btn{background:rgba(239,68,68,.15);color:#fecaca;border:1px solid rgba(239,68,68,.3);box-shadow:none}
+  .best-track-placeholder{width:116px;height:116px;border-radius:20px;display:grid;place-items:center;font-size:38px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 18px 40px -20px var(--c1)}
+  .best-track-title{font-size:18px;font-weight:850;color:#fff;line-height:1.25;overflow-wrap:anywhere}
+  .best-track-artist{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+  .best-track-actions{display:flex;flex-direction:column;gap:9px;width:100%;margin-top:4px}
+  .best-audio-btn,.best-pick-btn{width:100%;padding:12px 14px;border-radius:99px;font:inherit;font-size:13px;font-weight:750;cursor:pointer;transition:transform .18s,filter .18s,background .18s;border:1px solid var(--border)}
+  .best-audio-btn{color:#e9d5ff;background:rgba(139,92,246,.13);border-color:rgba(139,92,246,.38)}
+  .best-pick-btn{color:#fff;background:linear-gradient(100deg,#8b5cf6,#ec4899);border:0;box-shadow:0 12px 30px -16px rgba(236,72,153,.9)}
+  .best-audio-btn:hover,.best-pick-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .best-audio-btn:disabled,.best-pick-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+  .best-playlist-note{text-align:center;font-size:12px;line-height:1.5;color:var(--muted)}
+  .best-playlist-audio-status{text-align:center;min-height:17px;font-size:11px;color:#b8a8d8}
+  .audio-volume-panel{width:min(360px,100%);margin:0 auto;padding:12px 15px;border-radius:15px;background:rgba(255,255,255,.035);border:1px solid var(--border);display:flex;align-items:center;gap:12px}
+  .audio-volume-label{display:flex;align-items:center;gap:7px;color:#cfcfe0;font-size:11px;font-weight:750;white-space:nowrap}
+  .audio-volume-range{flex:1;min-width:60px;accent-color:#c084fc;cursor:pointer}
+  .audio-volume-value{min-width:34px;text-align:right;color:#c4b5fd;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
+  .best-playlist-pair.is-picking .best-track-card{pointer-events:none}
+  .best-result-champion{font-size:13px;color:#c4b5fd;text-align:center;margin-top:-4px}
+  @keyframes bestCardIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes bestWinnerPulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.65)}45%{box-shadow:0 0 0 8px rgba(34,197,94,.13),0 24px 60px -24px rgba(34,197,94,.7)}100%{box-shadow:0 0 0 1px rgba(34,197,94,.45),0 24px 60px -24px rgba(34,197,94,.7)}}
+  #screen-bestplaylist .champion-summary{margin-left:auto;margin-right:auto;align-self:center}
+  @media(max-width:700px){.best-playlist-pair{grid-template-columns:1fr}.best-track-card{padding:18px}.best-track-placeholder{width:92px;height:92px}}
+  .sound-result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;width:100%}
+  .sound-result-actions .btn-primary,.sound-result-actions .btn-secondary{width:auto;min-width:180px;padding:13px 24px;font-size:14px}
+  @media (max-width:640px){
+    .sound-player-card{padding:19px 15px}
+    .sound-wave-icon{width:88px;height:88px}
+    .sound-wave-icon svg{width:40px;height:40px}
+    .sound-result{padding:22px 14px}
+    .sound-result-stats{gap:14px}
+    .sound-result-row{grid-template-columns:22px minmax(0,1fr) auto;padding:9px}
+    .sound-round-actions,.sound-result-actions{flex-direction:column;width:100%}
+    .sound-round-actions .btn-primary,.sound-round-actions .btn-secondary,.sound-result-actions .btn-primary,.sound-result-actions .btn-secondary{width:100%}
+  }
+
   .modal{
     position:fixed;inset:0;background:rgba(5,5,12,.82);
     backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -1247,6 +1355,7 @@
   .history-item.keepdelete{border-left-color:#f472b6}
   .history-item.missing{border-left-color:#5eead4}
   .history-item.guess{border-left-color:#fbbf24}
+  .history-item.sound{border-left-color:#c084fc}
   .history-item.rating{border-left-color:#a855f7}
   .history-item .hi-body{flex:1;min-width:0}
   .history-item .hi-label{font-size:13.5px;font-weight:700;color:#eaeaf3;line-height:1.2}
@@ -1395,6 +1504,25 @@
   .rating-hero-display{font-size:clamp(56px,10vw,80px);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;transition:color .15s, text-shadow .15s}
   .rating-hero-of{font-size:14px;color:var(--muted);font-weight:700}
 
+  .rating-hero-tier-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    margin-top: -6px;
+  }
+  .rating-hero-tier {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 99px;
+    border: 1.5px solid currentColor;
+    background: rgba(255,255,255,.02);
+    box-shadow: 0 0 16px -4px currentColor;
+    transition: all 0.15s;
+  }
+
   .rating-points-label{
     text-align:center;font-size:12px;color:#8b8b9e;
     padding:6px 0 12px;border-bottom:1px solid var(--border);margin-bottom:12px;
@@ -1521,6 +1649,14 @@
       <button class="mode-card" data-mode="guess">
         <div class="mc-title">Угадай трек</div>
         <div class="mc-sub">6 попыток по подсказкам</div>
+      </button>
+      <button class="mode-card" data-mode="sound">
+        <div class="mc-title">Угадай по звуку</div>
+        <div class="mc-sub">Определи трек по аудиофрагменту</div>
+      </button>
+      <button class="mode-card" data-mode="bestplaylist">
+        <div class="mc-title">Оценка плейлиста SC</div>
+        <div class="mc-sub">Выбирай лучший трек из своего SoundCloud-плейлиста</div>
       </button>
       <button class="mode-card" data-mode="keepdelete">
         <div class="mc-title">Keep / Delete</div>
@@ -1709,6 +1845,39 @@
     </div>
   </section>
 
+  <section class="screen" id="screen-sound">
+    <header class="game-header">
+      <h1 class="game-title">Угадай по звуку</h1>
+      <div class="status-row">
+        <div class="sub" id="soundInfo">Раунд 1 / 20</div>
+        <div class="timer-pill" id="soundTimerPill">
+          <span class="dot"></span>
+          <span id="soundTimer">00:00</span>
+        </div>
+      </div>
+      <div class="progress-row">
+        <div class="progress"><div class="bar" id="soundProgressBar"></div></div>
+        <span class="progress-percent" id="soundProgressPercent">0%</span>
+      </div>
+    </header>
+    <div class="sound-layout" id="soundGameArea"></div>
+  </section>
+
+  <section class="screen" id="screen-bestplaylist">
+    <header class="game-header">
+      <h1 class="game-title">Оценка плейлиста SC</h1>
+      <div class="status-row">
+        <div class="sub" id="bestPlaylistInfo">Подготовка плейлиста…</div>
+        <div class="timer-pill" id="bestPlaylistTimerPill"><span class="dot"></span><span id="bestPlaylistTimer">00:00</span></div>
+      </div>
+      <div class="progress-row">
+        <div class="progress"><div class="bar" id="bestPlaylistProgressBar"></div></div>
+        <span class="progress-percent" id="bestPlaylistProgressPercent">0%</span>
+      </div>
+    </header>
+    <div class="best-playlist-wrap" id="bestPlaylistArea"></div>
+  </section>
+
   <section class="screen" id="screen-keepdelete">
     <header class="game-header">
       <h1 class="game-title" id="kdTitle">Keep / Delete</h1>
@@ -1762,7 +1931,7 @@
 
 </div>
 
-<div class="version-footer">v1.5.0</div>
+<div class="version-footer">v1.6.0</div>
 
 <div class="modal" id="rulesModal">
   <div class="modal-content">
@@ -1782,6 +1951,7 @@
         <li><b>Откуда строчка.</b> 30 раундов. Показывается строка из трека — нужно угадать, из какого.</li>
         <li><b>Что пропущено.</b> 20 раундов. Показывается трек и строчки из него, где нужно вписать пропущенные слова.</li>
         <li><b>Угадай трек.</b> 6 попыток угадать случайный трек по подсказкам.</li>
+        <li><b>Угадай по звуку.</b> 20 раундов: послушай аудиофрагмент и найди трек через поиск. Список треков берётся из audio_manifest.json, созданного из имён файлов в папках audios. Также есть отдельный турнир «Оценка плейлиста SC».</li>
         <li><b>Keep / Delete.</b> Выпадает случайный альбом, и ты решаешь — оставить трек или удалить.</li>
         <li><b>Оценка треков.</b> Выбери альбом или синглы в самом режиме и оцени каждый трек ползунком от 0 до 10. Цвет и название категории меняются от «Кошмара» до «Божественно».</li>
       </ul>
@@ -1955,6 +2125,8 @@
         <button data-rtab="line">Откуда строчка</button>
         <button data-rtab="missing">Что пропущено</button>
         <button data-rtab="guess">Угадай трек</button>
+        <button data-rtab="sound">Угадай по звуку</button>
+        <button data-rtab="bestplaylist">Оценка плейлиста SC</button>
         <button data-rtab="keepdelete">Keep/Delete</button>
         <button data-rtab="rating">Оценка</button>
       </div>
@@ -1990,6 +2162,9 @@
       <div class="rating-hero-display" id="ratingResultPercent">0.00</div>
       <div class="rating-hero-of">из 10</div>
     </div>
+    <div class="rating-hero-tier-wrap">
+      <div class="rating-hero-tier" id="ratingResultTier">СРЕДНЕ</div>
+    </div>
     <div class="rating-points-label">Награда: <span id="ratingResultPoints">+30</span> баллов</div>
     <div class="rating-results-list" id="ratingResultsList"></div>
     <div class="results-actions">
@@ -2021,6 +2196,8 @@ const screens = {
   line:       document.getElementById('screen-line'),
   missing:    document.getElementById('screen-missing'),
   guess:      document.getElementById('screen-guess'),
+  sound:      document.getElementById('screen-sound'),
+  bestplaylist: document.getElementById('screen-bestplaylist'),
   keepdelete: document.getElementById('screen-keepdelete'),
   rating:     document.getElementById('screen-rating'),
 };
@@ -2096,6 +2273,19 @@ const gtTimerEl = document.getElementById('gtTimer');
 const gtTimerPill = document.getElementById('gtTimerPill');
 const gtProgressBar = document.getElementById('gtProgressBar');
 const gtProgressPercent = document.getElementById('gtProgressPercent');
+
+const soundInfo = document.getElementById('soundInfo');
+const soundTimerEl = document.getElementById('soundTimer');
+const soundTimerPill = document.getElementById('soundTimerPill');
+const soundProgressBar = document.getElementById('soundProgressBar');
+const soundProgressPercent = document.getElementById('soundProgressPercent');
+const soundGameArea = document.getElementById('soundGameArea');
+const bestPlaylistInfo = document.getElementById('bestPlaylistInfo');
+const bestPlaylistTimerEl = document.getElementById('bestPlaylistTimer');
+const bestPlaylistTimerPill = document.getElementById('bestPlaylistTimerPill');
+const bestPlaylistProgressBar = document.getElementById('bestPlaylistProgressBar');
+const bestPlaylistProgressPercent = document.getElementById('bestPlaylistProgressPercent');
+const bestPlaylistArea = document.getElementById('bestPlaylistArea');
 
 const ratingTitleEl = document.getElementById('ratingTitle');
 const ratingInfoEl = document.getElementById('ratingInfo');
@@ -2185,6 +2375,47 @@ const GT_MAX_ATTEMPTS = 6;
 let gtState = null;
 let gtTimerStart = 0;
 let gtTimerInterval = null;
+
+const SOUND_ROUNDS = 20;
+// Чтобы включить остальные режимы после загрузки MP3, поменяй available на true.
+const SOUND_MODE_CONFIG = {
+  random:    { label: 'Рандомный отрывок', folder: 'random', points: 20, available: true,  hint: 'Фрагмент из случайного места трека' },
+  start:     { label: 'Начало',             folder: 'start',  points: 10, available: false, hint: 'Фрагмент с самого начала' },
+  beat:      { label: 'По биту',            folder: 'beat',   points: 15, available: false, hint: 'Фрагмент, выбранный по биту' },
+  rewind:    { label: 'Перемотка',          folder: 'rewind', points: 25, available: false, hint: 'Нужно определить трек после перемотки' },
+};
+let selectedSoundMode = 'random';
+let soundState = null;
+let soundAudio = null;
+const AUDIO_VOLUME_KEY = 'kv_audio_volume_v1';
+function readAudioVolume(){
+  try {
+    const stored = Number(localStorage.getItem(AUDIO_VOLUME_KEY));
+    return Number.isFinite(stored) && stored >= 0 && stored <= 1 ? stored : 0.8;
+  } catch { return 0.8; }
+}
+let audioVolume = readAudioVolume();
+function setAudioVolume(value){
+  const next = Math.max(0, Math.min(1, Number(value)));
+  if (!Number.isFinite(next)) return;
+  audioVolume = next;
+  try { localStorage.setItem(AUDIO_VOLUME_KEY, String(audioVolume)); } catch {}
+  if (soundAudio) soundAudio.volume = audioVolume;
+  if (bestPlaylistAudio) bestPlaylistAudio.volume = audioVolume;
+  document.querySelectorAll('[data-audio-volume]').forEach(input => { if (input.value !== String(audioVolume)) input.value = String(audioVolume); });
+  document.querySelectorAll('[data-volume-value]').forEach(output => { output.textContent = `${Math.round(audioVolume * 100)}%`; });
+}
+function audioVolumeControlHTML(){
+  return `<label class="audio-volume-panel"><span class="audio-volume-label">♫ Громкость</span><input class="audio-volume-range" type="range" min="0" max="1" step="0.01" value="${audioVolume}" data-audio-volume aria-label="Громкость аудио"><span class="audio-volume-value" data-volume-value>${Math.round(audioVolume * 100)}%</span></label>`;
+}
+function bindAudioVolumeControl(root){
+  if (!root) return;
+  root.querySelectorAll('[data-audio-volume]').forEach(input => {
+    input.addEventListener('input', () => setAudioVolume(input.value));
+  });
+}
+let soundTimerStart = 0;
+let soundTimerInterval = null;
 
 let kdState = null;
 
@@ -2727,6 +2958,8 @@ const MODE_DESCRIPTIONS = {
   line: { title: 'Откуда строчка', text: '30 раундов. Показывается строка из какого-то трека — нужно угадать, из какого именно.', reward: 'Выбери подкатегорию ниже.' },
   missing: { title: 'Что пропущено', text: '20 раундов. Показывается трек (обложка + название) и 2 или 4 строчки из него, но некоторые слова пропущены. Нужно вручную вписать эти слова.', reward: 'Награда: <b>база 120</b>, ориентир <b>5 минут</b>.' },
   guess: { title: 'Угадай трек', text: 'У тебя 6 попыток угадать случайный трек. После каждой попытки показываются подсказки.', reward: 'Награда: <b>до 80 баллов</b> — чем меньше попыток, тем больше.' },
+  sound: { title: 'Угадай по звуку', text: '20 раундов. Слушай аудиофрагмент и находи правильную композицию через поиск по всем MP3-файлам выбранной папки. В каждом раунде только одна попытка.', reward: 'Для «Рандомного отрывка»: <b>20 баллов за правильный ответ</b>, максимум <b>400 баллов</b> за партию.' },
+  bestplaylist: { title: 'Оценка плейлиста SC', text: 'Турнир на выбывание по трекам из папки audios/best. В каждом матче сравниваются два трека: можно прослушать лучший отрывок каждого и выбрать победителя. В конце останется чемпион всего плейлиста.', reward: 'Используется отдельный список из имён файлов audios/best. Для 391 трека будет 390 сравнений. Папка и manifest создаются скриптом generate_audio_manifest.py.' },
   keepdelete: { title: 'Keep / Delete', text: 'Выпадает случайный альбом. Показываются треки по одному — решаешь, оставить трек или удалить.', reward: 'Награда: <b>20 баллов</b> за завершение альбома.' },
   rating: { title: 'Оценка треков', text: 'Выбери альбом или все синглы прямо на экране игры и оцени каждый трек ползунком от 0 до 10 с шагом 0.1. Цвет ползунка плавно меняется от «Кошмара» к «Божественно». В конце — список всех оценок и общая оценка альбома.', reward: 'Награда: <b>ровно 30 баллов</b> за завершение.' },
 };
@@ -2788,6 +3021,15 @@ function renderModeDescription(){
       <button class="mode-submode-btn ${selectedLineSubmode === 'input' ? 'active' : ''}" data-lsubmode="input" ${!lyricsReady?'disabled':''}>Ввод через поиск</button>
     </div>`;
   }
+  if (selectedMode === 'sound'){
+    html += `<div class="mode-submodes sound-mode-choices">
+      ${Object.entries(SOUND_MODE_CONFIG).map(([key, cfg]) => `
+        <button class="mode-submode-btn ${selectedSoundMode === key ? 'active' : ''}" data-soundmode="${key}" ${!cfg.available ? 'disabled' : ''}>
+          ${cfg.label} · ${cfg.points} б.
+        </button>`).join('')}
+    </div>
+    <div class="mode-desc-text" style="margin:12px 0 0;color:#8b8b9e;font-size:12px">Сложность и награда: начало — 10, по биту — 15, рандомный отрывок — 20, перемотка — 25 баллов за правильный ответ. Остальные варианты появятся позже.</div>`;
+  }
   modeDescEl.innerHTML = html;
 
   let disabled = false;
@@ -2802,6 +3044,9 @@ function renderModeDescription(){
   });
   modeDescEl.querySelectorAll('.mode-submode-btn[data-lsubmode]').forEach(btn => {
     btn.addEventListener('click', () => { selectedLineSubmode = btn.dataset.lsubmode; renderModeDescription(); });
+  });
+  modeDescEl.querySelectorAll('.mode-submode-btn[data-soundmode]').forEach(btn => {
+    btn.addEventListener('click', () => { selectedSoundMode = btn.dataset.soundmode; renderModeDescription(); });
   });
 }
 
@@ -2824,6 +3069,8 @@ btnModeStart.addEventListener('click', () => {
   else if (selectedMode === 'line') runLineFlow(selectedLineSubmode);
   else if (selectedMode === 'missing') runMissingFlow();
   else if (selectedMode === 'guess') runGuessFlow();
+  else if (selectedMode === 'sound') runSoundFlow(selectedSoundMode);
+  else if (selectedMode === 'bestplaylist') runBestPlaylistFlow();
   else if (selectedMode === 'keepdelete') runKeepDeleteFlow();
   else if (selectedMode === 'rating') showRatingSetup();
 });
@@ -2833,6 +3080,7 @@ btnModeBack.addEventListener('click', () => {
   selectedOddSubmode = 'covers';
   selectedCmpSubmode = 'plays';
   selectedLineSubmode = 'choice';
+  selectedSoundMode = 'random';
   selectedRatingKey = '';
   modeCardsEl.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
   renderModeDescription();
@@ -2844,6 +3092,7 @@ document.getElementById('btnStart').addEventListener('click', () => {
   selectedOddSubmode = 'covers';
   selectedCmpSubmode = 'plays';
   selectedLineSubmode = 'choice';
+  selectedSoundMode = 'random';
   selectedRatingKey = '';
   modeCardsEl.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
   renderModeDescription();
@@ -2857,9 +3106,9 @@ document.getElementById('closeHistoryX').addEventListener('click', () => closeMo
 historyModal.addEventListener('click', e => { if (e.target === historyModal) closeModal('historyModal'); });
 
 /* ====================== RECORDS ====================== */
-const RECORDS_KEY = 'kaiAngelTracksGame_records_v16';
+const RECORDS_KEY = 'kaiAngelTracksGame_records_v17';
 const LEGACY_KEYS = [
-  'kaiAngelTracksGame_records_v15', 'kaiAngelTracksGame_records_v14', 'kaiAngelTracksGame_records_v13','kaiAngelTracksGame_records_v12','kaiAngelTracksGame_records_v11','kaiAngelTracksGame_records_v10',
+  'kaiAngelTracksGame_records_v16', 'kaiAngelTracksGame_records_v15', 'kaiAngelTracksGame_records_v14', 'kaiAngelTracksGame_records_v13','kaiAngelTracksGame_records_v12','kaiAngelTracksGame_records_v11','kaiAngelTracksGame_records_v10',
   'kaiAngelTracksGame_records_v9','kaiAngelTracksGame_records_v8','kaiAngelTracksGame_records_v7',
   'kaiAngelTracksGame_records_v6','kaiAngelTracksGame_records_v5','kaiAngelTracksGame_records_v4',
   'kaiAngelTracksGame_records_v3','kaiAngelTracksGame_records_v2','kaiAngelTracksGame_records_v1',
@@ -2880,6 +3129,8 @@ function defaultRecords(){
     lineResults: [],
     missingResults: [],
     guessResults: [],
+    soundResults: [],
+    bestPlaylistResults: [],
     keepDeleteResults: [],
     ratingGames: [],
     totalPoints: 0,
@@ -2899,6 +3150,8 @@ function normalizeRecords(raw){
     lineResults: Array.isArray(r.lineResults) ? r.lineResults : [],
     missingResults: Array.isArray(r.missingResults) ? r.missingResults : [],
     guessResults: Array.isArray(r.guessResults) ? r.guessResults : [],
+    soundResults: Array.isArray(r.soundResults) ? r.soundResults : [],
+    bestPlaylistResults: Array.isArray(r.bestPlaylistResults) ? r.bestPlaylistResults : [],
     keepDeleteResults: Array.isArray(r.keepDeleteResults) ? r.keepDeleteResults : [],
     ratingGames: Array.isArray(r.ratingGames) ? r.ratingGames : [],
     totalPoints: typeof r.totalPoints === 'number' ? r.totalPoints : 0,
@@ -3037,6 +3290,14 @@ function saveGuessResult(entry){
   r.guessResults = r.guessResults.slice(0, MAX_LIST);
   saveRecords(r);
 }
+function saveSoundResult(entry){
+  const r = loadRecords();
+  if (!Array.isArray(r.soundResults)) r.soundResults = [];
+  r.soundResults.push(entry);
+  r.soundResults.sort((a, b) => b.date - a.date);
+  r.soundResults = r.soundResults.slice(0, MAX_LIST);
+  saveRecords(r);
+}
 function saveKeepDeleteResult(entry){
   const r = loadRecords();
   r.keepDeleteResults.push(entry);
@@ -3062,9 +3323,11 @@ function renderGeneralStatsHTML(r){
   const lineCount = r.lineResults.length;
   const msCount = (r.missingResults || []).length;
   const gtCount = (r.guessResults || []).length;
+  const soundCount = (r.soundResults || []).length;
+  const bestPlaylistCount = (r.bestPlaylistResults || []).length;
   const kdCount = (r.keepDeleteResults || []).length;
   const rateCount = (r.ratingGames || []).length;
-  const totalGames = tournCount + chronoCount + oddCount + cmpCount + lineCount + msCount + gtCount + kdCount + rateCount;
+  const totalGames = tournCount + chronoCount + oddCount + cmpCount + lineCount + msCount + gtCount + soundCount + bestPlaylistCount + kdCount + rateCount;
 
   const tournTime = r.tournamentTimes.reduce((a, e) => a + e.time, 0);
   const chronoTime = r.chronologyTimes.reduce((a, e) => a + e.time, 0);
@@ -3072,8 +3335,10 @@ function renderGeneralStatsHTML(r){
   const cmpTime = r.comparisonResults.reduce((a, e) => a + (e.totalTime || 0), 0);
   const lineTime = r.lineResults.reduce((a, e) => a + (e.totalTime || 0), 0);
   const msTime = (r.missingResults || []).reduce((a, e) => a + (e.totalTime || 0), 0);
+  const soundTime = (r.soundResults || []).reduce((a, e) => a + (e.totalTime || 0), 0);
+  const bestPlaylistTime = (r.bestPlaylistResults || []).reduce((a, e) => a + (e.totalTime || 0), 0);
   const rateTime = (r.ratingGames || []).reduce((a, e) => a + (e.time || 0), 0);
-  const totalTime = tournTime + chronoTime + oddTime + cmpTime + lineTime + msTime + rateTime;
+  const totalTime = tournTime + chronoTime + oddTime + cmpTime + lineTime + msTime + soundTime + bestPlaylistTime + rateTime;
 
   const totalPoints = r.totalPoints || 0;
 
@@ -3099,7 +3364,7 @@ function renderGeneralStatsHTML(r){
       <div class="stats-hero-item"><span class="stats-hero-label">Всего баллов</span><span class="stats-hero-value purple">${totalPoints.toLocaleString('ru-RU')}</span></div>
       <div class="stats-hero-item"><span class="stats-hero-label">Всего игр</span><span class="stats-hero-value">${totalGames}</span></div>
       <div class="stats-hero-item"><span class="stats-hero-label">Общее время</span><span class="stats-hero-value">${formatDuration(totalTime)}</span></div>
-      <div class="stats-hero-item"><span class="stats-hero-label">Режимов сыграно</span><span class="stats-hero-value">${[tournCount, chronoCount, oddCount, cmpCount, lineCount, msCount, gtCount, kdCount, rateCount].filter(x=>x>0).length} / 9</span></div>
+      <div class="stats-hero-item"><span class="stats-hero-label">Режимов сыграно</span><span class="stats-hero-value">${[tournCount, chronoCount, oddCount, cmpCount, lineCount, msCount, gtCount, soundCount, bestPlaylistCount, kdCount, rateCount].filter(x=>x>0).length} / 11</span></div>
     </div>
     <div class="stats-block">
       <div class="stats-block-head"><div class="stats-block-title">Турнир</div><div class="stats-block-count">${tournCount}</div></div>
@@ -3165,6 +3430,25 @@ function renderGeneralStatsHTML(r){
       </div>
     </div>
     <div class="stats-block">
+      <div class="stats-block-head"><div class="stats-block-title">Угадай по звуку</div><div class="stats-block-count">${soundCount}</div></div>
+      <div class="stats-block-rows">
+        ${soundCount ? `
+          <div class="stats-block-row"><span class="lbl">Общее время</span><b>${formatDuration(soundTime)}</b></div>
+          <div class="stats-block-row"><span class="lbl">Лучшая точность</span><b>${Math.max(...r.soundResults.map(e => e.accuracy || 0)).toFixed(1)}%</b></div>
+          <div class="stats-block-row"><span class="lbl">Лучший счёт</span><b>${Math.max(...r.soundResults.map(e => e.points || 0))} баллов</b></div>
+        ` : `<div class="stats-block-empty">Ещё не сыграно</div>`}
+      </div>
+    </div>
+    <div class="stats-block">
+      <div class="stats-block-head"><div class="stats-block-title">Оценка плейлиста SC</div><div class="stats-block-count">${bestPlaylistCount}</div></div>
+      <div class="stats-block-rows">
+        ${bestPlaylistCount ? `
+          <div class="stats-block-row"><span class="lbl">Общее время</span><b>${formatDuration(bestPlaylistTime)}</b></div>
+          <div class="stats-block-row"><span class="lbl">Последний чемпион</span><b>${esc(r.bestPlaylistResults[0].champion?.title || '—')}</b></div>
+        ` : `<div class="stats-block-empty">Ещё не сыграно</div>`}
+      </div>
+    </div>
+    <div class="stats-block">
       <div class="stats-block-head"><div class="stats-block-title">Keep / Delete</div><div class="stats-block-count">${kdCount}</div></div>
       <div class="stats-block-rows">
         ${kdCount ? `
@@ -3201,7 +3485,7 @@ function renderRecords(){
     return;
   }
 
-  count.textContent = `Т: ${r.tournamentTimes.length} · Х: ${r.chronologyTimes.length} · К: ${r.oddOneOut.length} · Б: ${r.comparisonResults.length} · С: ${r.lineResults.length} · П: ${(r.missingResults||[]).length} · У: ${(r.guessResults||[]).length} · KD: ${(r.keepDeleteResults||[]).length} · О: ${(r.ratingGames||[]).length}`;
+  count.textContent = `Т: ${r.tournamentTimes.length} · Х: ${r.chronologyTimes.length} · К: ${r.oddOneOut.length} · Б: ${r.comparisonResults.length} · С: ${r.lineResults.length} · П: ${(r.missingResults||[]).length} · У: ${(r.guessResults||[]).length} · Зв: ${(r.soundResults||[]).length} · SC: ${(r.bestPlaylistResults||[]).length} · KD: ${(r.keepDeleteResults||[]).length} · О: ${(r.ratingGames||[]).length}`;
 
   if (recordsTab === 'tournament'){
     const subtabsHtml = `<div class="records-subtabs">
@@ -3347,6 +3631,30 @@ function renderRecords(){
       const status = e.won ? `Угадал за ${e.attemptsUsed} поп.` : 'Не угадал';
       const cls = e.won ? 'green' : 'red';
       html += `<div class="record-item"><div class="ri-rank ${rc}">${i + 1}</div><div class="ri-info"><div class="ri-title">${esc(e.answer.title)}</div><div class="ri-sub">${esc(e.answer.artist)} · ${status} · ${formatDate(e.date)}</div></div><div class="ri-score ${cls}">${e.won ? '+' + e.points : '0'}</div></div>`;
+    });
+    html += `</div></div>`;
+    body.innerHTML = html;
+  }
+
+  else if (recordsTab === 'sound'){
+    const list = r.soundResults || [];
+    if (!list.length){ body.innerHTML = emptyRecordsHTML('Сыграй «Угадай по звуку».'); return; }
+    let html = `<div class="record-section"><div class="record-section-title">Последние партии</div><div class="record-list">`;
+    list.slice(0, MAX_LIST).forEach((e, i) => {
+      const rc = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      html += `<div class="record-item"><div class="ri-rank ${rc}">${i + 1}</div><div class="ri-info"><div class="ri-title">${e.correct}/${e.total} <span class="ri-mode sound">${esc(e.modeLabel || 'Рандомный отрывок')}</span></div><div class="ri-sub">${e.accuracy.toFixed(1)}% · ${formatTime(e.totalTime)} · ${formatDate(e.date)}</div></div><div class="ri-score green">+${e.points}</div></div>`;
+    });
+    html += `</div></div>`;
+    body.innerHTML = html;
+  }
+
+  else if (recordsTab === 'bestplaylist'){
+    const list = r.bestPlaylistResults || [];
+    if (!list.length){ body.innerHTML = emptyRecordsHTML('Сыграй «Оценка плейлиста SC».'); return; }
+    let html = `<div class="record-section"><div class="record-section-title">Последние турниры плейлиста</div><div class="record-list">`;
+    list.slice(0, MAX_LIST).forEach((e, i) => {
+      const rc = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      html += `<div class="record-item"><div class="ri-rank ${rc}">${i + 1}</div><div class="ri-info"><div class="ri-title">${esc(e.champion?.title || '—')}</div><div class="ri-sub">${esc(e.champion?.artist || '')} · ${e.tracks || 0} треков · ${formatTime(e.totalTime || 0)} · ${formatDate(e.date)}</div></div><div class="ri-score green">Чемпион</div></div>`;
     });
     html += `</div></div>`;
     body.innerHTML = html;
@@ -3649,11 +3957,11 @@ function showChampion(){
 }
 
 let bracketPanZoomCleanup = null;
-function setupBracketPanZoom(){
+function setupBracketPanZoom(viewportId='bracketViewport', canvasId='bracketCanvas', zoomLabelId='zoomLabel'){
   if (bracketPanZoomCleanup){ bracketPanZoomCleanup(); bracketPanZoomCleanup = null; }
-  const viewport = document.getElementById('bracketViewport');
-  const canvas = document.getElementById('bracketCanvas');
-  const zoomLabel = document.getElementById('zoomLabel');
+  const viewport = document.getElementById(viewportId);
+  const canvas = document.getElementById(canvasId);
+  const zoomLabel = document.getElementById(zoomLabelId);
   if (!viewport || !canvas) return;
   const MIN_SCALE = 0.25, MAX_SCALE = 3;
   let scale = 1, tx = 0, ty = 0, isDown = false;
@@ -5234,6 +5542,659 @@ function finishGuessGame(){
   }
 }
 
+/* ====================== УГАДАЙ ПО ЗВУКУ ====================== */
+const SOUND_CYRILLIC = {
+  'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'zh','з':'z','и':'i','й':'y',
+  'к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f',
+  'х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+};
+function soundSlug(value){
+  let s = String(value || '').toLowerCase().replace(/ё/g, 'yo').normalize('NFKD');
+  s = Array.from(s).map(ch => SOUND_CYRILLIC[ch] !== undefined ? SOUND_CYRILLIC[ch] : ch).join('');
+  s = s.replace(/&/g, ' and ').replace(/\+/g, ' plus ');
+  s = s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').replace(/-{2,}/g, '-');
+  return s || 'unknown';
+}
+let audioManifestCache = null;
+async function loadAudioManifest(forceReload=false){
+  if (audioManifestCache && !forceReload) return audioManifestCache;
+  const response = await fetch(`audio_manifest.json${forceReload ? `?v=${Date.now()}` : ''}`, { cache: 'no-store' });
+  if (!response.ok) throw new Error('Не найден audio_manifest.json. Запусти generate_audio_manifest.py в папке проекта.');
+  const manifest = await response.json();
+  if (!manifest || typeof manifest !== 'object') throw new Error('audio_manifest.json имеет неправильный формат.');
+  audioManifestCache = manifest;
+  return manifest;
+}
+function makeManifestTrack(entry, index, folder){
+  const artist = String(entry.artist || '').trim();
+  const title = String(entry.title || '').trim();
+  const file = String(entry.file || '').trim();
+  if (!artist || !title || !file) return null;
+  const colors = colorsFor(title + artist);
+  return {
+    id: index, artist, title, file, folder,
+    src: `audios/${folder}/${encodeURIComponent(file)}`,
+    cover: null, c1: colors.c1, c2: colors.c2, plays: null, duration: null, year: null, albumName: null
+  };
+}
+async function findSoundTracks(mode){
+  const cfg = SOUND_MODE_CONFIG[mode];
+  const manifest = await loadAudioManifest();
+  const rawEntries = Array.isArray(manifest[cfg.folder]) ? manifest[cfg.folder] : [];
+  const options = rawEntries.map((entry, index) => makeManifestTrack(entry, index, cfg.folder)).filter(Boolean);
+  if (options.length < SOUND_ROUNDS){
+    throw new Error(`В audios/${cfg.folder} найдено ${options.length} файлов. Для партии нужно минимум ${SOUND_ROUNDS}.`);
+  }
+  const queue = shuffle(options).slice(0, SOUND_ROUNDS).map(track => ({ track, src: track.src }));
+  return { queue, options };
+}
+function startSoundTimer(){
+  stopSoundTimer();
+  soundTimerStart = Date.now();
+  soundTimerPill.classList.remove('stopped');
+  updateSoundTimer();
+  soundTimerInterval = setInterval(updateSoundTimer, 500);
+}
+function updateSoundTimer(){
+  const elapsed = Math.floor((Date.now() - soundTimerStart) / 1000);
+  const mm = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const ss = String(elapsed % 60).padStart(2, '0');
+  soundTimerEl.textContent = `${mm}:${ss}`;
+}
+function stopSoundTimer(){
+  if (soundTimerInterval) clearInterval(soundTimerInterval);
+  soundTimerInterval = null;
+  soundTimerPill.classList.add('stopped');
+}
+function stopSoundAudio(){
+  if (soundAudio){
+    soundAudio.pause();
+    try { soundAudio.currentTime = 0; } catch {}
+    soundAudio = null;
+  }
+}
+function startSoundGame(mode, queue, options){
+  stopSoundAudio();
+  soundState = {
+    mode,
+    options,
+    modeLabel: SOUND_MODE_CONFIG[mode].label,
+    queue: shuffle(queue),
+    currentIndex: 0,
+    results: [],
+    correct: 0,
+    points: 0,
+    finished: false,
+    saved: false,
+  };
+  soundState.roundStartedAt = Date.now();
+  soundInfo.textContent = `Раунд 1 / ${SOUND_ROUNDS}`;
+  soundProgressBar.style.width = '0%';
+  soundProgressPercent.textContent = '0%';
+  startSoundTimer();
+  renderSoundRound();
+}
+function renderSoundRound(){
+  if (!soundState || soundState.finished) return;
+  stopSoundAudio();
+  const index = soundState.currentIndex;
+  const round = soundState.queue[index];
+  const modeConfig = SOUND_MODE_CONFIG[soundState.mode];
+  const answered = soundState.results[index] || null;
+  soundInfo.textContent = `Раунд ${index + 1} / ${SOUND_ROUNDS} · ${soundState.correct} верно`;
+  const pct = Math.round((index / SOUND_ROUNDS) * 100);
+  soundProgressBar.style.width = `${pct}%`;
+  soundProgressPercent.textContent = `${pct}%`;
+
+  let feedbackHTML = '';
+  let actionsHTML = '';
+  let searchHTML = '';
+  if (answered){
+    const correctTrack = round.track;
+    feedbackHTML = answered.correct
+      ? `<div class="sound-feedback correct">✓ Правильно! <b>${esc(correctTrack.title)}</b> · ${esc(correctTrack.artist)} · +${modeConfig.points} баллов</div>`
+      : answered.skipped
+        ? `<div class="sound-feedback wrong">Раунд пропущен. Правильный ответ: <b>${esc(correctTrack.title)}</b> · ${esc(correctTrack.artist)}. За этот раунд 0 баллов.</div>`
+        : `<div class="sound-feedback wrong">✕ Неправильно. Правильный ответ: <b>${esc(correctTrack.title)}</b> · ${esc(correctTrack.artist)}. За этот раунд 0 баллов.</div>`;
+    actionsHTML = `<div class="sound-round-actions"><button class="btn-primary" id="soundNextRound">${index + 1 >= SOUND_ROUNDS ? 'Посмотреть результат' : 'Следующий раунд'}</button></div>`;
+  } else {
+    searchHTML = `
+      <div class="sound-search-wrap">
+        <div class="sound-search-label">Как называется этот трек?</div>
+        <input type="text" class="line-search-input" id="soundSearchInput" placeholder="Начни вводить название или исполнителя..." autocomplete="off">
+        <div class="line-search-hint" id="soundSearchHint">Начни вводить название или имя исполнителя. За раунд даётся одна попытка.</div>
+        <div class="line-search-list" id="soundSearchList"></div>
+      </div>`;
+    actionsHTML = `<div class="sound-round-actions"><button class="btn-secondary" id="soundSkipRound">Пропустить раунд · 0 баллов</button></div>`;
+  }
+
+  soundGameArea.innerHTML = `
+    <div class="sound-player-card">
+      <div class="sound-wave-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 26v12M17 17v30M26 10v44M35 20v24M44 14v36M53 25v14" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sound-player-title">Аудиофрагмент ${index + 1} / ${SOUND_ROUNDS}</div>
+      <div class="sound-player-sub">${esc(modeConfig.hint)}. Можно прослушивать фрагмент повторно. Название и обложка не показываются до ответа.</div>
+      <button class="sound-play-btn" id="soundPlayBtn" ${answered ? 'disabled' : ''}>▶ Прослушать фрагмент</button>
+      ${audioVolumeControlHTML()}
+      <div class="sound-audio-status" id="soundAudioStatus">${answered ? 'Раунд завершён' : 'Нажми кнопку, чтобы включить звук'}</div>
+    </div>
+    ${searchHTML}
+    ${feedbackHTML}
+    ${actionsHTML}
+  `;
+  bindAudioVolumeControl(soundGameArea);
+  const input = document.getElementById('soundSearchInput');
+  if (input){
+    input.addEventListener('input', () => renderSoundSearchList(input.value));
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter'){
+        e.preventDefault();
+        const first = document.querySelector('#soundSearchList .line-search-item:not(.disabled)');
+        if (first) submitSoundGuess(Number(first.dataset.id));
+      }
+    });
+    setTimeout(() => input.focus(), 60);
+  }
+}
+function renderSoundSearchList(query){
+  if (!soundState || soundState.finished || soundState.results[soundState.currentIndex]) return;
+  const list = document.getElementById('soundSearchList');
+  const hint = document.getElementById('soundSearchHint');
+  if (!list) return;
+  const q = String(query || '').trim().toLocaleLowerCase('ru-RU');
+  if (!q){
+    list.innerHTML = '';
+    hint.textContent = 'Начни вводить название или имя исполнителя. За раунд даётся одна попытка.';
+    return;
+  }
+  const items = soundState.options.filter(track => `${track.title} ${track.artist}`.toLocaleLowerCase('ru-RU').includes(q));
+  if (!items.length){
+    list.innerHTML = `<div class="line-search-empty">Ничего не найдено</div>`;
+    hint.textContent = 'Попробуй изменить запрос';
+    return;
+  }
+  hint.textContent = `Найдено: ${items.length}. Выбери правильный трек.`;
+  list.innerHTML = items.slice(0, 30).map(track => `
+    <button class="line-search-item" data-id="${track.id}">
+      <span class="lsi-title">${esc(track.title)}</span>
+      <span class="lsi-artist">${esc(track.artist)}</span>
+    </button>`).join('');
+}
+async function playSoundClip(){
+  if (!soundState || soundState.finished || soundState.results[soundState.currentIndex]) return;
+  const round = soundState.queue[soundState.currentIndex];
+  const status = document.getElementById('soundAudioStatus');
+  const button = document.getElementById('soundPlayBtn');
+  const expectedUrl = new URL(round.src, document.baseURI).href;
+
+  if (soundAudio && soundAudio.src === expectedUrl && !soundAudio.paused && !soundAudio.ended){
+    soundAudio.pause();
+    if (button) button.textContent = '▶ Продолжить';
+    if (status) status.textContent = 'Пауза';
+    return;
+  }
+
+  if (!soundAudio || soundAudio.src !== expectedUrl){
+    stopSoundAudio();
+    soundAudio = new Audio(round.src);
+    soundAudio.preload = 'auto';
+    soundAudio.volume = audioVolume;
+    soundAudio.addEventListener('ended', () => {
+      const currentStatus = document.getElementById('soundAudioStatus');
+      if (currentStatus) currentStatus.textContent = 'Фрагмент закончился. Можешь прослушать ещё раз.';
+      const currentButton = document.getElementById('soundPlayBtn');
+      if (currentButton) currentButton.textContent = '↻ Прослушать ещё раз';
+    });
+    soundAudio.addEventListener('error', () => {
+      const currentStatus = document.getElementById('soundAudioStatus');
+      if (currentStatus){ currentStatus.textContent = 'Не удалось воспроизвести файл. Проверь MP3 и его имя.'; currentStatus.classList.add('error'); }
+      const currentButton = document.getElementById('soundPlayBtn');
+      if (currentButton) currentButton.textContent = '▶ Повторить';
+    });
+  } else if (soundAudio.ended){
+    soundAudio.currentTime = 0;
+  }
+
+  try {
+    soundAudio.volume = audioVolume;
+    if (status){ status.textContent = 'Загрузка аудио…'; status.classList.remove('error'); }
+    if (button) button.disabled = true;
+    await soundAudio.play();
+    if (status) status.textContent = 'Слушай внимательно';
+    if (button) button.textContent = 'Ⅱ Пауза';
+  } catch (error) {
+    console.error('Ошибка воспроизведения:', error);
+    if (status){ status.textContent = 'Не удалось запустить аудио. Проверь файл и попробуй ещё раз.'; status.classList.add('error'); }
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+function submitSoundGuess(trackId){
+  if (!soundState || soundState.finished || soundState.results[soundState.currentIndex]) return;
+  const guess = soundState.options.find(track => track.id === trackId);
+  if (!guess) return;
+  const round = soundState.queue[soundState.currentIndex];
+  const correct = guess.id === round.track.id;
+  const time = Math.max(0, Date.now() - (soundState.roundStartedAt || soundTimerStart));
+  soundState.results[soundState.currentIndex] = {
+    correct,
+    guess: { title: guess.title, artist: guess.artist },
+    answer: { title: round.track.title, artist: round.track.artist },
+    timeMs: time,
+    skipped: false,
+  };
+  if (correct){
+    soundState.correct++;
+    soundState.points += SOUND_MODE_CONFIG[soundState.mode].points;
+  }
+  stopSoundAudio();
+  renderSoundRound();
+}
+function skipSoundRound(){
+  if (!soundState || soundState.finished || soundState.results[soundState.currentIndex]) return;
+  const round = soundState.queue[soundState.currentIndex];
+  soundState.results[soundState.currentIndex] = {
+    correct: false,
+    guess: null,
+    answer: { title: round.track.title, artist: round.track.artist },
+    timeMs: Math.max(0, Date.now() - (soundState.roundStartedAt || soundTimerStart)),
+    skipped: true,
+  };
+  stopSoundAudio();
+  renderSoundRound();
+}
+function nextSoundRound(){
+  if (!soundState || soundState.finished || !soundState.results[soundState.currentIndex]) return;
+  soundState.currentIndex++;
+  if (soundState.currentIndex >= SOUND_ROUNDS){
+    finishSoundGame();
+    return;
+  }
+  soundState.roundStartedAt = Date.now();
+  renderSoundRound();
+}
+function finishSoundGame(){
+  if (!soundState || soundState.finished) return;
+  stopSoundAudio();
+  stopSoundTimer();
+  soundState.finished = true;
+  const totalTime = Math.floor((Date.now() - soundTimerStart) / 1000);
+  const accuracy = (soundState.correct / SOUND_ROUNDS) * 100;
+  const points = soundState.points;
+  soundState.totalTime = totalTime;
+  soundState.accuracy = accuracy;
+  soundState.points = points;
+
+  if (!soundState.saved){
+    const entry = {
+      mode: soundState.mode,
+      modeLabel: soundState.modeLabel,
+      correct: soundState.correct,
+      total: SOUND_ROUNDS,
+      accuracy,
+      points,
+      totalTime,
+      rounds: soundState.results.map((r, i) => ({ round: i + 1, correct: r.correct, skipped: !!r.skipped, guess: r.guess, answer: r.answer })),
+      date: Date.now(),
+    };
+    saveSoundResult(entry);
+    if (points > 0) addPointsToHistory(points, 'sound', 'Угадай по звуку', `${soundState.correct}/${SOUND_ROUNDS} · ${formatTime(totalTime)}`);
+    soundState.saved = true;
+  }
+  renderSoundResult();
+}
+function renderSoundResult(){
+  if (!soundState) return;
+  soundInfo.textContent = 'Игра завершена';
+  soundProgressBar.style.width = '100%';
+  soundProgressPercent.textContent = '100%';
+  const rows = soundState.results.map((result, i) => `
+    <div class="sound-result-row ${result.correct ? 'good' : 'bad'}">
+      <div class="sound-result-num">${i + 1}</div>
+      <div class="sound-result-track"><b>${esc(result.answer.title)}</b><span>${esc(result.answer.artist)}${result.guess ? ` · твой ответ: ${esc(result.guess.title)}` : ' · пропуск'}</span></div>
+      <div class="sound-result-points">${result.correct ? `+${SOUND_MODE_CONFIG[soundState.mode].points}` : '0'}</div>
+    </div>`).join('');
+  soundGameArea.innerHTML = `
+    <div class="sound-result">
+      <div class="sound-result-title">${soundState.correct === SOUND_ROUNDS ? 'Идеально!' : 'Раунд завершён'}</div>
+      <div class="sound-result-percent">${soundState.accuracy.toFixed(0)}%</div>
+      <div class="sound-result-stats">
+        <div>Правильно<b>${soundState.correct} / ${SOUND_ROUNDS}</b></div>
+        <div>Время<b>${formatTime(soundState.totalTime)}</b></div>
+        <div>Баллы<b>+${soundState.points}</b></div>
+      </div>
+      <div class="sound-player-sub">Режим: ${esc(soundState.modeLabel)} · максимум за партию: ${SOUND_ROUNDS * SOUND_MODE_CONFIG[soundState.mode].points}</div>
+      <div class="sound-result-list">${rows}</div>
+      <div class="sound-result-actions">
+        <button class="btn-primary" id="soundPlayAgain">Сыграть снова</button>
+        <button class="btn-secondary" id="soundToMenu">В меню</button>
+      </div>
+    </div>`;
+}
+soundGameArea.addEventListener('click', event => {
+  const playButton = event.target.closest('#soundPlayBtn');
+  if (playButton){ playSoundClip(); return; }
+  const item = event.target.closest('.line-search-item[data-id]');
+  if (item && soundGameArea.contains(item)){ submitSoundGuess(Number(item.dataset.id)); return; }
+  if (event.target.closest('#soundSkipRound')){ skipSoundRound(); return; }
+  if (event.target.closest('#soundNextRound')){ nextSoundRound(); return; }
+  if (event.target.closest('#soundPlayAgain')){ runSoundFlow(soundState?.mode || 'random'); return; }
+  if (event.target.closest('#soundToMenu')){ showScreen('menu'); return; }
+});
+async function runSoundFlow(mode){
+  const cfg = SOUND_MODE_CONFIG[mode];
+  if (!cfg || !cfg.available){
+    alert('Этот вариант сложности пока недоступен. Сейчас можно играть только в «Рандомный отрывок».');
+    return;
+  }
+  document.getElementById('shuffleTitle').textContent = 'Ищем аудиофрагменты…';
+  document.getElementById('shuffleSub').textContent = 'Проверяем файлы в папке audios';
+  showScreen('shuffle');
+  const bar = document.getElementById('shuffleBar');
+  bar.style.transition = 'none';
+  bar.style.width = '0%';
+  void bar.offsetWidth;
+  bar.style.transition = 'width 120ms linear';
+  let loaded;
+  try { loaded = await findSoundTracks(mode); }
+  catch (error){
+    showScreen('modes');
+    alert(error.message || 'Не удалось загрузить список аудиофайлов.');
+    return;
+  }
+  bar.style.width = '100%';
+  startSoundGame(mode, loaded.queue, loaded.options);
+  soundState.roundStartedAt = Date.now();
+  showScreen('sound');
+}
+
+/* ====================== ОЦЕНКА ПЛЕЙЛИСТА SOUNDCLOUD ====================== */
+let bestPlaylistState = null;
+let bestPlaylistAudio = null;
+let bestPlaylistTimerStart = 0;
+let bestPlaylistTimerInterval = null;
+
+function stopBestPlaylistAudio(){
+  if (bestPlaylistAudio){
+    bestPlaylistAudio.pause();
+    try { bestPlaylistAudio.currentTime = 0; } catch {}
+    bestPlaylistAudio = null;
+  }
+}
+function startBestPlaylistTimer(){
+  stopBestPlaylistTimer();
+  bestPlaylistTimerStart = Date.now();
+  bestPlaylistTimerPill.classList.remove('stopped');
+  updateBestPlaylistTimer();
+  bestPlaylistTimerInterval = setInterval(updateBestPlaylistTimer, 500);
+}
+function updateBestPlaylistTimer(){
+  const elapsed = Math.floor((Date.now() - bestPlaylistTimerStart) / 1000);
+  const mm = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const ss = String(elapsed % 60).padStart(2, '0');
+  bestPlaylistTimerEl.textContent = `${mm}:${ss}`;
+}
+function stopBestPlaylistTimer(){
+  if (bestPlaylistTimerInterval) clearInterval(bestPlaylistTimerInterval);
+  bestPlaylistTimerInterval = null;
+  bestPlaylistTimerPill.classList.add('stopped');
+}
+function startBestPlaylistGame(entries){
+  stopBestPlaylistAudio();
+  bestPlaylistState = {
+    roundTracks: shuffle(entries),
+    winners: [],
+    matchIndex: 0,
+    matchesPlayed: 0,
+    totalMatches: entries.length - 1,
+    bracket: [{ roundSize: entries.length, matches: [] }],
+    finished: false,
+    saved: false,
+    totalTracks: entries.length,
+  };
+  bestPlaylistProgressBar.style.width = '0%';
+  bestPlaylistProgressPercent.textContent = '0%';
+  startBestPlaylistTimer();
+  showScreen('bestplaylist');
+  proceedBestPlaylist();
+}
+function updateBestPlaylistProgress(){
+  if (!bestPlaylistState) return;
+  const pct = bestPlaylistState.totalMatches ? bestPlaylistState.matchesPlayed / bestPlaylistState.totalMatches * 100 : 100;
+  bestPlaylistProgressBar.style.width = `${pct}%`;
+  bestPlaylistProgressPercent.textContent = `${Math.round(pct)}%`;
+}
+function proceedBestPlaylist(){
+  if (!bestPlaylistState || bestPlaylistState.finished) return;
+  const st = bestPlaylistState;
+  while (true){
+    if (st.matchIndex * 2 >= st.roundTracks.length){
+      st.roundTracks = st.winners;
+      st.winners = [];
+      st.matchIndex = 0;
+      if (st.roundTracks.length === 1){ finishBestPlaylist(); return; }
+      st.bracket.push({ roundSize: st.roundTracks.length, matches: [] });
+    }
+    if (st.matchIndex * 2 + 1 >= st.roundTracks.length){
+      const track = st.roundTracks[st.matchIndex * 2];
+      st.winners.push(track);
+      st.bracket[st.bracket.length - 1].matches.push({ a: track, b: null, winner: track, auto: true });
+      st.matchIndex++;
+      continue;
+    }
+    break;
+  }
+  renderBestPlaylistMatch();
+}
+function renderBestPlaylistMatch(){
+  if (!bestPlaylistState || bestPlaylistState.finished) return;
+  stopBestPlaylistAudio();
+  const st = bestPlaylistState;
+  const a = st.roundTracks[st.matchIndex * 2];
+  const b = st.roundTracks[st.matchIndex * 2 + 1];
+  bestPlaylistInfo.textContent = `Сравнение ${st.matchesPlayed + 1} / ${st.totalMatches}`;
+  updateBestPlaylistProgress();
+  const card = (track, slot) => `
+    <article class="best-track-card" style="--c1:${track.c1};--c2:${track.c2}">
+      <div class="best-track-placeholder">${esc((track.title[0] || '♪').toUpperCase())}</div>
+      <div class="best-track-title">${esc(track.title)}</div>
+      <div class="best-track-artist">${esc(track.artist)}</div>
+      <div class="best-track-actions">
+        <button class="best-audio-btn" data-best-play="${slot}">▶ Прослушать лучший отрывок</button>
+        <button class="best-pick-btn" data-best-pick="${slot}">Выбрать этот трек</button>
+      </div>
+    </article>`;
+  bestPlaylistArea.innerHTML = `
+    <div class="best-playlist-prompt">Какой трек лучше? Сравни два фрагмента и выбери победителя.</div>
+    <div class="best-playlist-pair">${card(a, 0)}${card(b, 1)}</div>
+    ${audioVolumeControlHTML()}
+    <div class="best-playlist-audio-status" id="bestPlaylistAudioStatus">Нажми «Прослушать» на карточке, чтобы включить фрагмент.</div>
+    <div class="best-playlist-note">Треки случайно распределены по сетке. Проигравшие выбывают, победители проходят дальше.</div>`;
+  bindAudioVolumeControl(bestPlaylistArea);
+}
+async function playBestPlaylistPreview(slot){
+  if (!bestPlaylistState || bestPlaylistState.finished) return;
+  const st = bestPlaylistState;
+  const track = st.roundTracks[st.matchIndex * 2 + slot];
+  if (!track) return;
+  const status = document.getElementById('bestPlaylistAudioStatus');
+  const expectedUrl = new URL(track.src, document.baseURI).href;
+  const buttons = bestPlaylistArea.querySelectorAll('[data-best-play]');
+
+  if (bestPlaylistAudio && bestPlaylistAudio.src === expectedUrl && !bestPlaylistAudio.paused && !bestPlaylistAudio.ended){
+    bestPlaylistAudio.pause();
+    if (buttons[slot]) buttons[slot].textContent = '▶ Продолжить';
+    if (status) status.textContent = `Пауза: ${track.artist} — ${track.title}`;
+    return;
+  }
+
+  if (bestPlaylistAudio && bestPlaylistAudio.src === expectedUrl && bestPlaylistAudio.paused && !bestPlaylistAudio.ended){
+    try {
+      await bestPlaylistAudio.play();
+      if (buttons[slot]) buttons[slot].textContent = 'Ⅱ Пауза';
+      if (status) status.textContent = `Сейчас играет: ${track.artist} — ${track.title}`;
+    } catch (error) {
+      console.error('Не удалось продолжить аудио:', error);
+      if (status) status.textContent = 'Не удалось продолжить воспроизведение. Попробуй ещё раз.';
+    }
+    return;
+  }
+
+  stopBestPlaylistAudio();
+  buttons.forEach((button, index) => { button.textContent = index === slot ? 'Ⅱ Пауза' : '▶ Прослушать лучший отрывок'; });
+  if (status) status.textContent = `Загружаем: ${track.artist} — ${track.title}`;
+  bestPlaylistAudio = new Audio(track.src);
+  bestPlaylistAudio.preload = 'auto';
+  bestPlaylistAudio.volume = audioVolume;
+  bestPlaylistAudio.addEventListener('ended', () => {
+    const el = document.getElementById('bestPlaylistAudioStatus');
+    if (el) el.textContent = 'Фрагмент закончился. Можно послушать ещё раз или выбрать победителя.';
+    const currentButtons = bestPlaylistArea.querySelectorAll('[data-best-play]');
+    if (currentButtons[slot]) currentButtons[slot].textContent = '↻ Прослушать ещё раз';
+  });
+  bestPlaylistAudio.addEventListener('error', () => {
+    const el = document.getElementById('bestPlaylistAudioStatus');
+    if (el) el.textContent = 'Не удалось воспроизвести MP3. Проверь имя файла и audio_manifest.json.';
+    const currentButtons = bestPlaylistArea.querySelectorAll('[data-best-play]');
+    if (currentButtons[slot]) currentButtons[slot].textContent = '▶ Повторить';
+  });
+  try {
+    await bestPlaylistAudio.play();
+    if (status) status.textContent = `Сейчас играет: ${track.artist} — ${track.title}`;
+    const currentButtons = bestPlaylistArea.querySelectorAll('[data-best-play]');
+    if (currentButtons[slot]) currentButtons[slot].textContent = 'Ⅱ Пауза';
+  } catch (error){
+    console.error('Ошибка воспроизведения SC-фрагмента:', error);
+    if (status) status.textContent = 'Не удалось запустить аудио. Проверь файл и попробуй снова.';
+  }
+}
+function chooseBestPlaylistWinner(slot){
+  if (!bestPlaylistState || bestPlaylistState.finished) return;
+  const st = bestPlaylistState;
+  const a = st.roundTracks[st.matchIndex * 2];
+  const b = st.roundTracks[st.matchIndex * 2 + 1];
+  const winner = slot === 0 ? a : b;
+  const loser = slot === 0 ? b : a;
+  bestPlaylistArea.querySelectorAll('[data-best-pick]').forEach(btn => { btn.disabled = true; });
+  const buttons = bestPlaylistArea.querySelectorAll('[data-best-pick]');
+  const cards = bestPlaylistArea.querySelectorAll('.best-track-card');
+  const pair = bestPlaylistArea.querySelector('.best-playlist-pair');
+  if (pair) pair.classList.add('is-picking');
+  if (cards[slot]) cards[slot].classList.add('winner');
+  if (cards[1 - slot]) cards[1 - slot].classList.add('loser');
+  if (buttons[slot]) buttons[slot].textContent = '✓ Победитель';
+  if (buttons[1 - slot]) buttons[1 - slot].textContent = 'Выбыл';
+  const status = document.getElementById('bestPlaylistAudioStatus');
+  if (status) status.textContent = `Победитель: ${winner.artist} — ${winner.title}`;
+  stopBestPlaylistAudio();
+  st.bracket[st.bracket.length - 1].matches.push({ a, b, winner, loser, auto: false });
+  st.matchesPlayed++;
+  updateBestPlaylistProgress();
+  setTimeout(() => {
+    if (!bestPlaylistState || bestPlaylistState !== st || st.finished) return;
+    st.winners.push(winner);
+    st.matchIndex++;
+    proceedBestPlaylist();
+  }, 760);
+}
+function renderBestPlaylistBracket(champion){
+  let html = '<div class="bracket">';
+  bestPlaylistState.bracket.forEach((round, index) => {
+    html += '<div class="bracket-round">';
+    html += `<div class="round-title">Раунд ${index + 1} · ${round.roundSize} треков</div>`;
+    html += '<div class="round-matches">';
+    round.matches.forEach(match => {
+      html += '<div class="bracket-match">';
+      html += trackLine(match.a, match.winner === match.a);
+      if (match.b) html += trackLine(match.b, match.winner === match.b);
+      else html += `<div class="bracket-track auto"><span class="bt-thumb" style="--c1:#666;--c2:#333">›</span><span class="bt-title">проходит дальше</span></div>`;
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  const letter = esc((champion.title[0] || '♪').toUpperCase());
+  html += `<div class="bracket-round champion-col"><div class="round-title">Победитель плейлиста</div><div class="round-matches"><div class="champion-mini"><div class="cm-thumb" style="--c1:${champion.c1};--c2:${champion.c2}">${letter}</div><div class="cm-title">${esc(champion.title)}</div><div class="cm-artist">${esc(champion.artist)}</div></div></div></div>`;
+  return html + '</div>';
+}
+function finishBestPlaylist(){
+  if (!bestPlaylistState || bestPlaylistState.finished) return;
+  const st = bestPlaylistState;
+  stopBestPlaylistAudio();
+  stopBestPlaylistTimer();
+  st.finished = true;
+  const totalTime = Math.floor((Date.now() - bestPlaylistTimerStart) / 1000);
+  st.totalTime = totalTime;
+  const champion = st.roundTracks[0];
+  bestPlaylistInfo.textContent = 'Турнир завершён';
+  bestPlaylistProgressBar.style.width = '100%';
+  bestPlaylistProgressPercent.textContent = '100%';
+  if (!st.saved){
+    const entry = {
+      champion: { title: champion.title, artist: champion.artist, file: champion.file },
+      tracks: st.totalTracks,
+      matches: st.matchesPlayed,
+      totalTime,
+      date: Date.now(),
+    };
+    const records = loadRecords();
+    records.bestPlaylistResults.unshift(entry);
+    records.bestPlaylistResults = records.bestPlaylistResults.slice(0, MAX_LIST);
+    saveRecords(records);
+    addPointsToHistory(25, 'bestplaylist', 'Оценка плейлиста SC', `${champion.artist} — ${champion.title} · ${st.totalTracks} треков`);
+    st.saved = true;
+  }
+  bestPlaylistArea.innerHTML = `
+    <div class="champion-summary" style="--c1:${champion.c1}">
+      ${coverHTML(champion, true)}
+      <h2>${esc(champion.title)}</h2>
+      <p>${esc(champion.artist)}</p>
+      <div class="badge">Победитель SoundCloud-плейлиста · ${st.totalTracks} треков</div>
+      <div class="best-result-champion">${st.matchesPlayed} сравнений · ${formatTime(totalTime)}</div>
+      <div class="pb-total-line">Награда: <b>+25 баллов</b></div>
+    </div>
+    <div class="bracket-wrap">
+      <div class="bracket-title">Сетка плейлиста</div>
+      <div class="bracket-hint">Зажми ЛКМ и тяни · колесо мыши — зум · двойной клик — сброс</div>
+      <div class="bracket-viewport" id="bestBracketViewport"><div class="bracket-canvas" id="bestBracketCanvas">${renderBestPlaylistBracket(champion)}</div><div class="bracket-zoom"><button data-zoom="out">−</button><div class="zoom-label" id="bestZoomLabel">100%</div><button data-zoom="in">+</button><button data-zoom="reset">⟳</button></div></div>
+    </div>
+    <div class="end-actions"><button class="btn-primary" id="bestPlaylistPlayAgain">Сыграть снова</button><button class="btn-secondary" id="bestPlaylistToMenu">В меню</button></div>`;
+  setupBracketPanZoom('bestBracketViewport', 'bestBracketCanvas', 'bestZoomLabel');
+  document.getElementById('bestPlaylistPlayAgain').addEventListener('click', () => runBestPlaylistFlow());
+  document.getElementById('bestPlaylistToMenu').addEventListener('click', () => showScreen('menu'));
+}
+bestPlaylistArea.addEventListener('click', event => {
+  const play = event.target.closest('[data-best-play]');
+  if (play){ playBestPlaylistPreview(Number(play.dataset.bestPlay)); return; }
+  const pick = event.target.closest('[data-best-pick]');
+  if (pick){ chooseBestPlaylistWinner(Number(pick.dataset.bestPick)); return; }
+});
+async function runBestPlaylistFlow(){
+  document.getElementById('shuffleTitle').textContent = 'Загружаем SoundCloud-плейлист…';
+  document.getElementById('shuffleSub').textContent = 'Читаем названия MP3 из папки audios/best';
+  showScreen('shuffle');
+  const bar = document.getElementById('shuffleBar');
+  bar.style.transition = 'none'; bar.style.width = '0%'; void bar.offsetWidth;
+  try {
+    const manifest = await loadAudioManifest(true);
+    const raw = Array.isArray(manifest.best) ? manifest.best : [];
+    const entries = raw.map((entry, index) => makeManifestTrack(entry, index, 'best')).filter(Boolean);
+    bar.style.width = '100%';
+    if (entries.length < 2){
+      showScreen('modes');
+      alert(`В audios/best найдено ${entries.length} подходящих MP3. Нужно минимум 2. Проверь имена файлов: artist_track.mp3 и заново запусти generate_audio_manifest.py.`);
+      return;
+    }
+    document.getElementById('shuffleSub').textContent = `Найдено ${entries.length} треков · готовим сетку турнира`;
+    startBestPlaylistGame(entries);
+  } catch (error){
+    showScreen('modes');
+    alert(error.message || 'Не удалось загрузить список SoundCloud-треков.');
+  }
+}
+
 /* ====================== KEEP / DELETE ====================== */
 function startKeepDeleteGame(){
   const eligible = trackStructure.albums.filter(a => a.tracks.length >= 4);
@@ -5639,11 +6600,21 @@ function finishRatingGame(){
 async function showRatingResults(finalAvg){
   document.getElementById('ratingResultAlbum').textContent = ratingState.albumName;
   const heroEl = document.getElementById('ratingResultPercent');
+  const tierEl = document.getElementById('ratingResultTier');
+  
   heroEl.textContent = '0.00';
-  
   const initColors = getSmoothColors(0);
-  heroEl.style.color = getTextColorForSlider(initColors.base);
+  const initTextColor = getTextColorForSlider(initColors.base);
   
+  heroEl.style.color = initTextColor;
+  
+  // Начальное состояние плашки
+  const initialTier = getTier(0);
+  tierEl.textContent = initialTier.name.toUpperCase();
+  tierEl.style.color = initTextColor;
+  tierEl.style.borderColor = initTextColor;
+  tierEl.style.boxShadow = `0 0 16px -4px ${initTextColor}`;
+
   document.getElementById('ratingResultPoints').textContent = '+' + RATING_POINTS_FIXED;
 
   const listEl = document.getElementById('ratingResultsList');
@@ -5651,17 +6622,22 @@ async function showRatingResults(finalAvg){
   
   openModal('ratingResultsModal');
 
-  // Очищаем предыдущую анимацию, если она была
-  if (ratingAnimFrame) cancelAnimationFrame(ratingAnimFrame);
+  let currentSum = 0;
 
-  // Сначала отрисовываем все строки, чтобы не было дерганий
-  const rowsData = ratingState.ratings.map((r, i) => {
-    const row = document.createElement('div');
-    row.className = 'rating-result-row';
+  for (let i = 0; i < ratingState.ratings.length; i++) {
+    const r = ratingState.ratings[i];
+    const prevAvg = i === 0 ? 0 : currentSum / i;
+    currentSum += r.value;
+    const newAvg = currentSum / (i + 1);
     const colors = getSmoothColors(r.value);
     const textColor = getTextColorForSlider(colors.base);
-    
+
+    const row = document.createElement('div');
+    row.className = 'rating-result-row';
+    row.style.opacity = '0';
+    row.style.transform = 'translateY(8px)';
     row.style.borderColor = colors.base === '#4a4a5a' ? 'rgba(255,255,255,0.2)' : colors.base;
+    
     row.innerHTML = `
       <div class="rating-result-num">${i + 1}</div>
       <div class="rating-result-info">
@@ -5673,41 +6649,56 @@ async function showRatingResults(finalAvg){
         <span style="font-size:10px;font-weight:normal;text-transform:uppercase;margin-left:6px;opacity:0.8">${getTier(r.value).name}</span>
       </div>
     `;
-    return { row, value: r.value, elScore: row.querySelector('.row-score') };
-  });
+    
+    listEl.appendChild(row);
+    
+    // Даем браузеру отрисовать элемент перед анимацией
+    await new Promise(res => requestAnimationFrame(res));
+    
+    row.style.transition = 'opacity 0.3s, transform 0.3s';
+    row.style.opacity = '1';
+    row.style.transform = 'translateY(0)';
 
-  rowsData.forEach(rd => listEl.appendChild(rd.row));
+    const rowScoreEl = row.querySelector('.row-score');
 
-  const duration = 1500;
-  const startTime = performance.now();
-  let currentSum = 0;
+    // Запускаем анимацию цифр одновременно (1 секунда)
+    await Promise.all([
+      animateEaseOut(0, r.value, 1000, (val) => {
+        rowScoreEl.textContent = val.toFixed(1);
+      }),
+      animateEaseOut(prevAvg, newAvg, 1000, (val) => {
+        heroEl.textContent = val.toFixed(2);
+        const curColors = getSmoothColors(val);
+        const curTextColor = getTextColorForSlider(curColors.base);
+        const curTier = getTier(val);
+        
+        heroEl.style.color = curTextColor;
+        
+        // Обновляем плашку общей оценки
+        tierEl.textContent = curTier.name.toUpperCase();
+        tierEl.style.color = curTextColor;
+        tierEl.style.borderColor = curTextColor;
+        tierEl.style.boxShadow = `0 0 16px -4px ${curTextColor}`;
+      })
+    ]);
 
-  function animate(now) {
-    const t = Math.min(1, (now - startTime) / duration);
-    const ease = 1 - Math.pow(1 - t, 3);
+    listEl.scrollTop = listEl.scrollHeight;
 
-    // Анимируем общую оценку
-    const currentAvg = finalAvg * ease;
-    heroEl.textContent = currentAvg.toFixed(2);
-    const curColors = getSmoothColors(currentAvg);
-    heroEl.style.color = getTextColorForSlider(curColors.base);
-
-    // Анимируем оценки отдельных треков
-    rowsData.forEach(rd => {
-      rd.elScore.textContent = (rd.value * ease).toFixed(1);
-    });
-
-    if (t < 1) {
-      ratingAnimFrame = requestAnimationFrame(animate);
-    } else {
-      heroEl.textContent = finalAvg.toFixed(2);
-      const finalColors = getSmoothColors(finalAvg);
-      heroEl.style.color = getTextColorForSlider(finalColors.base);
-      rowsData.forEach(rd => rd.elScore.textContent = rd.value.toFixed(1));
-    }
+    // Ждем 0.5 секунды после завершения анимации
+    await sleep(500); 
   }
-  
-  ratingAnimFrame = requestAnimationFrame(animate);
+
+  // Финальная фиксация
+  heroEl.textContent = finalAvg.toFixed(2);
+  const finalColors = getSmoothColors(finalAvg);
+  const finalTextColor = getTextColorForSlider(finalColors.base);
+  const finalTier = getTier(finalAvg);
+
+  heroEl.style.color = finalTextColor;
+  tierEl.textContent = finalTier.name.toUpperCase();
+  tierEl.style.color = finalTextColor;
+  tierEl.style.borderColor = finalTextColor;
+  tierEl.style.boxShadow = `0 0 16px -4px ${finalTextColor}`;
 }
 
 document.getElementById('ratingPlayAgain').addEventListener('click', () => {
@@ -5803,7 +6794,7 @@ async function init(){
   await loadLyrics();
 
   if (allTracks.length >= 2){
-    menuSub.textContent = `${allTracks.length} треков · 9 режимов`;
+    menuSub.textContent = `${allTracks.length} треков · 10 режимов`;
     menuStats.innerHTML =
       `Синглов: <b>${trackStructure.singles.length}</b><br>` +
       `Альбомов: <b>${trackStructure.albums.length}</b><br>` +
